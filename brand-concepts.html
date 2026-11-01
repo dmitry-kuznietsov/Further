@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f8fc"><title>Название и логотип — варианты для сайта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Основа страницы и навигация */
+:root{--ink:#172238;--muted:#66768b;--line:#dce5ee}
+*{box-sizing:border-box}body{margin:0;background:#f6f8fc;color:var(--ink);font-family:Onest,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1250px,calc(100% - 48px));margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:31px 0}
+.back{font-size:13px;font-weight:700;color:#347da8}.badge{padding:9px 15px;border:1px solid var(--line);border-radius:999px;color:#567085;font-size:12px;font-weight:700;background:#fff}
+/* Вступление и карточки логотипов */
+.intro{padding:52px 0 42px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;color:#397b9e}
+h1{max-width:970px;margin:14px 0 18px;font-size:clamp(43px,6vw,82px);line-height:1.05;letter-spacing:-.07em}
+.intro p:last-child{max-width:700px;color:var(--muted);font-size:16px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;padding-bottom:70px}
+.card{grid-column:span 2;min-height:255px;padding:25px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 12px 30px rgba(42,75,111,.045)}
+.card:nth-child(4),.card:nth-child(5){grid-column:span 3}
+.card-top{display:flex;align-items:center;justify-content:space-between;color:#94a2b1;font-size:11px;font-weight:800;letter-spacing:.13em}
+.mark-row{display:flex;align-items:center;gap:15px;margin:36px 0 28px}
+.mark{width:65px;height:65px;display:grid;place-items:center;flex:0 0 65px;border-radius:19px}
+.mark svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.word{font-size:clamp(30px,3vw,44px);font-weight:800;letter-spacing:-.075em}
+.dot{color:#f17668}.card h2{margin:0 0 7px;font-size:15px;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+.one .mark{background:#d7efff;color:#1b77a9}.two .mark{background:#e8ddff;color:#8051c1}.three .mark{background:#d9eff0;color:#278684}.four .mark{background:#ffe4d8;color:#db6e58}.five .mark{background:#e3ecff;color:#4778c2}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(42,75,111,.1);transition:.25s}
+/* Адаптивная раскладка */
+@media(max-width:850px){.card{grid-column:span 3}.card:nth-child(4),.card:nth-child(5){grid-column:span 3}.word{font-size:35px}}
+@media(max-width:560px){.wrap{width:calc(100% - 28px)}header{padding:20px 0}.intro{padding:36px 0 25px}h1{font-size:43px}.grid{grid-template-columns:1fr}.card,.card:nth-child(4),.card:nth-child(5){grid-column:auto;min-height:225px}.mark-row{margin:25px 0}}
+</style>
+</head><body>
+<div class="wrap"><!-- Навигация между страницами --><header><a class="back" href="./index.html">← На сайт</a><a class="badge" href="./brand-concepts-en.html">English names →</a></header>
+<!-- Вступление и варианты логотипов -->
+<section class="intro"><p class="eyebrow">НОВОЕ ИМЯ ДЛЯ ПУТЕШЕСТВИЙ</p><h1>Пять направлений для одного бренда.</h1><p>Все варианты выдержаны в характере сайта: мягкая типографика, светлая основа, ясный знак и небольшие яркие акценты. Выберите имя, которое хочется увидеть в шапке.</p></section>
+<main class="grid">
+<article class="card one"><div class="card-top"><span>01 / ЗНАКОМОЕ ИМЯ</span><span>РЕКОМЕНДУЮ</span></div><div class="mark-row"><span class="mark"><svg viewBox="0 0 40 40"><path d="M5 18 35 6 24 35l-6-12-13-5Z"/><path d="M18 23 35 6"/></svg></span><span class="word">дальше<span class="dot">.</span></span></div><h2>Дальше</h2><p>Сохраняет узнаваемость. Самолётик показывает движение вперёд и хорошо сочетается с горным хиро.</p></article>
+<article class="card two"><div class="card-top"><span>02 / КОРОТКО</span><span>МЯГКО</span></div><div class="mark-row"><span class="mark"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="5"/><path d="M20 2v4M20 34v4M2 20h4M34 20h4"/></svg></span><span class="word">туда<span class="dot">.</span></span></div><h2>Туда</h2><p>Очень короткое название про выбранное направление. Знак похож на точку назначения на карте.</p></article>
+<article class="card three"><div class="card-top"><span>03 / В ДВИЖЕНИИ</span><span>ДРУЖЕЛЮБНО</span></div><div class="mark-row"><span class="mark"><svg viewBox="0 0 40 40"><path d="M5 25c9 0 15-4 26-16M6 31c10-1 17-6 28-17M10 35c6-2 13-6 21-14"/></svg></span><span class="word">летим<span class="dot">.</span></span></div><h2>Летим</h2><p>Лёгкий и разговорный тон. Три линии в знаке напоминают крыло и воздушный поток.</p></article>
+<article class="card four"><div class="card-top"><span>04 / ЭМОЦИЯ</span><span>ЭНЕРГИЯ</span></div><div class="mark-row"><span class="mark"><svg viewBox="0 0 40 40"><path d="M5 30a15 15 0 0 1 30 0"/><path d="M10 30h20"/><path d="M20 10V5"/></svg></span><span class="word">пора<span class="dot">.</span></span></div><h2>Пора</h2><p>Название про момент, когда идея становится поездкой. В знаке — солнце над горизонтом.</p></article>
+<article class="card five"><div class="card-top"><span>05 / ОТКРЫТИЯ</span><span>МАСШТАБ</span></div><div class="mark-row"><span class="mark"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M6 20h28M20 6c-4 4-6 9-6 14s2 10 6 14M20 6c4 4 6 9 6 14s-2 10-6 14"/><circle cx="31" cy="10" r="3" fill="currentColor" stroke="none"/></svg></span><span class="word">вокруг<span class="dot">.</span></span></div><h2>Вокруг</h2><p>Подходит для сайта, который будет расширять географию. Орбита передаёт идею путешествий.</p></article>
+</main></div></body></html>

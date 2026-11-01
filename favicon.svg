@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Further — серые горы с рельефом на голубом фоне</title>
+  <defs>
+    <clipPath id="shape"><rect width="128" height="128" rx="32"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8d9f0"/>
+      <stop offset=".56" stop-color="#d4e9f6"/>
+      <stop offset="1" stop-color="#eff8fb"/>
+    </linearGradient>
+    <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9c4c9"/>
+      <stop offset="1" stop-color="#7e929e"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#shape)">
+    <rect width="128" height="128" rx="32" fill="url(#sky)"/>
+    <circle cx="98" cy="32" r="11" fill="#ef8d78"/>
+    <path d="M-4 106 31 49 60 91 83 57 132 111v21H-4Z" fill="#95a7b0"/>
+    <path d="M31 49v83H-4v-26Z" fill="#6b8290"/>
+    <path d="M31 49 60 91l23-34-9 50Z" fill="#b6c3c8"/>
+    <path d="M83 57v75h49v-21Z" fill="#718693"/>
+    <path d="m31 49-10 17 10-5 9 6-9-18Zm52 8-10 15 10-4 9 5-9-16Z" fill="#e7ecee"/>
+    <path d="M-5 122 45 75l24 30 24-35 40 52v10H-5Z" fill="url(#rock)"/>
+    <path d="M45 75v57H-5v-10Z" fill="#718591"/>
+    <path d="M45 75 69 105l24-35-14 62H45Z" fill="#c1c9cc"/>
+    <path d="M93 70v62h40v-10Z" fill="#738895"/>
+    <path d="m45 75-11 13 11-4 9 7-9-16Zm48-5-10 15 10-5 9 6-9-16Z" fill="#f0f2f2"/>
+    <path d="M11 117 29 99l7 7m18 13 14-17 6 7m14 12 11-17 9 11" fill="none" stroke="#e1e8eb" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+    <path d="M-3 123c31-8 59-7 87-1 17 4 34 4 48-2v12H-3Z" fill="#acb9bf" opacity=".65"/>
+  </g>
+</svg>

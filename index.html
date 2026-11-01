@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <!-- Метаданные и ресурсы страницы -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="Откройте Европу и Азию по-новому. Выберите маршрут и перейдите к поиску билетов на Wizz Air или Ryanair.">
+  <title>Further — лететь навстречу новому</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon-further.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="./assets/hero-mountains-green.webp" as="image">
+  <link rel="stylesheet" href="./styles.css">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('dalshe-theme')==='dark'?'dark':'light'}catch(e){}</script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержимому</a>
+  <!-- Шапка сайта -->
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="Further — на главную"><img class="brand-mark" src="./assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a>
+    <div class="header-actions"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Включить тёмную тему" title="Переключить тему"><span class="theme-toggle-icon" aria-hidden="true"></span><span class="theme-toggle-text">Тёмная тема</span></button><a class="header-cta" href="#flight-search">Найти рейс</a></div>
+  </header>
+  <main id="main">
+    <!-- Первый экран с горным пейзажем -->
+    <section class="hero shell" id="top" aria-labelledby="hero-title">
+      <div class="hero-photo" role="img" aria-label="Зелёная горная долина с озером и снежными вершинами"></div><div class="hero-wash"></div>
+      <div class="hero-topline"><span class="hero-signal" aria-hidden="true"></span><span>Путешествия начинаются с любопытства</span></div>
+      <div class="hero-content"><p class="eyebrow">ПОРА ОТКРЫТЬ НОВОЕ</p><h1 id="hero-title"><span class="hero-first-line">Не откладывай.</span><br><em>Лети дальше.</em></h1><p class="hero-copy">Новые улицы, другие ритмы, любимые города. Выберите направление и начните путешествие прямо здесь.</p><a class="hero-scroll" href="#destinations">Смотреть направления</a></div>
+      <div class="hero-bottomline" aria-hidden="true"><span>ТВОЙ СЛЕДУЮЩИЙ МАРШРУТ</span></div>
+    </section>
+
+    <!-- Форма выбора маршрута и перехода к авиакомпаниям -->
+    <section class="search-section shell reveal" id="flight-search" aria-labelledby="search-title">
+      <div class="search-heading"><div><p class="eyebrow muted">ПРОСТО ВЫБЕРИ НАПРАВЛЕНИЕ</p><h2 id="search-title">Куда полетим<span>?</span></h2></div><p>Выберите маршрут и откройте поиск билетов напрямую у авиакомпании.</p></div>
+      <form id="flight-form" novalidate>
+        <fieldset class="trip-type"><legend class="sr-only">Тип поездки</legend><label><input type="radio" name="trip" value="round" checked><span>Туда и обратно</span></label><label><input type="radio" name="trip" value="oneway"><span>В одну сторону</span></label></fieldset>
+        <div class="route-row">
+          <div class="search-control city-control" id="origin-control"><span class="control-icon" aria-hidden="true">◉</span><div class="control-copy"><label for="origin">Откуда</label><input id="origin" name="origin" role="combobox" aria-autocomplete="list" aria-controls="origin-options" aria-expanded="false" placeholder="Город вылета" autocomplete="off" required></div><span class="control-chevron" aria-hidden="true"></span><div class="city-menu popover" id="origin-options" role="listbox" aria-label="Города вылета" hidden></div></div>
+          <button class="swap-button" type="button" id="swap-cities" aria-label="Поменять города местами">⇄</button>
+          <div class="search-control city-control" id="destination-control"><span class="control-icon" aria-hidden="true">◎</span><div class="control-copy"><label for="destination">Куда</label><input id="destination" name="destination" role="combobox" aria-autocomplete="list" aria-controls="destination-options" aria-expanded="false" placeholder="Куда хочется?" autocomplete="off" required></div><span class="control-chevron" aria-hidden="true"></span><div class="city-menu popover" id="destination-options" role="listbox" aria-label="Города прилёта" hidden></div></div>
+        </div>
+        <div class="detail-row" id="detail-row">
+          <div class="search-control picker-control" id="departure-control"><button type="button" class="control-button" id="departure-trigger" aria-haspopup="dialog" aria-controls="departure-calendar" aria-expanded="false"><span class="control-icon" aria-hidden="true">▦</span><span class="control-copy"><span class="control-label">Вылет</span><strong id="departure-label">Выбрать дату</strong></span><span class="control-chevron" aria-hidden="true"></span></button><div class="calendar-panel popover" id="departure-calendar" role="dialog" aria-label="Дата вылета" hidden></div></div>
+          <div class="search-control picker-control" id="return-control"><button type="button" class="control-button" id="return-trigger" aria-haspopup="dialog" aria-controls="return-calendar" aria-expanded="false"><span class="control-icon" aria-hidden="true">▦</span><span class="control-copy"><span class="control-label">Обратно</span><strong id="return-label">Выбрать дату</strong></span><span class="control-chevron" aria-hidden="true"></span></button><div class="calendar-panel popover" id="return-calendar" role="dialog" aria-label="Дата обратного рейса" hidden></div></div>
+          <div class="search-control picker-control" id="passenger-control"><button type="button" class="control-button" id="passenger-trigger" aria-haspopup="dialog" aria-controls="passenger-panel" aria-expanded="false"><span class="control-icon" aria-hidden="true">♙</span><span class="control-copy"><span class="control-label">Пассажиры</span><strong id="passenger-label">1 взрослый</strong></span><span class="control-chevron" aria-hidden="true"></span></button><div class="passenger-panel popover" id="passenger-panel" role="dialog" aria-label="Количество пассажиров" hidden><div><strong>Взрослые</strong><small>От 12 лет</small></div><div class="counter"><button type="button" id="passenger-minus" aria-label="Уменьшить количество пассажиров">−</button><output id="passenger-count">1</output><button type="button" id="passenger-plus" aria-label="Увеличить количество пассажиров">+</button></div><button type="button" class="panel-done" id="passenger-done">Готово</button></div></div>
+        </div>
+        <div class="airline-actions"><button class="airline-button wizz-button" type="button" data-airline="wizz"><span class="airline-symbol" aria-hidden="true">W</span><span class="airline-name">Искать на <strong>Wizz Air</strong></span></button><button class="airline-button ryanair-button" type="button" data-airline="ryanair"><span class="airline-symbol" aria-hidden="true">R</span><span class="airline-name">Искать на <strong>Ryanair</strong></span></button></div>
+        <div class="search-bottom"><p id="form-message" role="status">Выберите маршрут и сравните предложения у авиакомпаний.</p><span>Поиск откроется в новой вкладке</span></div>
+      </form>
+    </section>
+
+    <!-- Баннер с каруселью городов -->
+    <section class="spotlight shell reveal" aria-labelledby="spotlight-title">
+      <div class="spotlight-image"><img id="idea-image" src="./assets/istanbul.webp" alt="Стамбул и Босфор вечером" loading="lazy"></div>
+      <div class="spotlight-shade" aria-hidden="true"></div>
+      <div class="spotlight-inner">
+        <div class="spotlight-top"><span class="spotlight-kicker"><i aria-hidden="true"></i> НАПРАВЛЕНИЕ ПО НАСТРОЕНИЮ</span><span class="spotlight-meta"><button id="idea-play-toggle" type="button" aria-label="Остановить карусель городов">Пауза</button><span id="idea-counter">01 / 12</span></span></div>
+        <div class="spotlight-main"><h2 id="spotlight-title">Выбирай момент.<br><em>Город найдётся.</em></h2><div class="spotlight-place"><strong id="idea-city" aria-live="polite">Стамбул</strong></div><div class="spotlight-actions"><button id="idea-pick" class="idea-pick" type="button">К форме поиска</button></div></div>
+        <div class="spotlight-rail" id="idea-rail" role="group" aria-label="Карусель городов — прокрутите для выбора"></div>
+      </div>
+    </section>
+    <!-- Каталог направлений с фильтрами и пагинацией -->
+    <section class="destinations shell" id="destinations" aria-labelledby="destinations-title">
+      <div class="section-heading reveal"><div><p class="eyebrow muted">КОЛЛЕКЦИЯ ВДОХНОВЕНИЯ</p><h2 id="destinations-title">Места, которые<br><em>зовут в дорогу.</em></h2></div><div class="section-side"><p>От городов для длинных прогулок до уголков, где хочется просто остановиться и смотреть по сторонам.</p><div class="region-filters" role="group" aria-label="Регион направлений"><button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Все <span>24</span></button><button class="filter" type="button" data-filter="europe" aria-pressed="false">Европа <span>12</span></button><button class="filter" type="button" data-filter="asia" aria-pressed="false">Азия <span>12</span></button></div></div></div>
+      <div class="destination-grid" id="destination-grid"></div>
+      <div class="destination-more-wrap"><p id="destination-progress" aria-live="polite">Показано 8 из 24</p><div class="destination-controls"><button class="destination-more" id="destination-more" type="button"><span>Показать больше</span><small id="destination-more-count">+8</small></button><button class="destination-less" id="destination-less" type="button" hidden>Показать меньше</button></div></div>
+      <p class="destination-note">Нажмите на место — оно появится в форме поиска. И пусть планы станут ближе.</p>
+    </section>
+    <!-- Три шага от идеи до поиска билета -->
+    <section class="how-it-works shell reveal" id="how-it-works" aria-labelledby="how-title"><div class="how-heading"><p class="eyebrow">ВСЁ ОЧЕНЬ ПРОСТО</p><h2 id="how-title">От идеи<br><em>до маршрута.</em></h2></div><div class="steps"><div class="step"><span class="step-number">01</span><h3>Выберите место</h3><p>Найдите город в коллекции или введите свой маршрут.</p></div><div class="step"><span class="step-number">02</span><h3>Откройте поиск</h3><p>Перейдите с выбранными датами на Wizz Air или Ryanair.</p></div><div class="step"><span class="step-number">03</span><h3>Летите дальше</h3><p>Проверьте рейсы и оформите билет у авиакомпании.</p></div></div></section>
+  </main>
+  <!-- Подвал и ссылки на авиакомпании -->
+  <footer class="site-footer shell"><div class="footer-main"><div class="footer-intro"><span class="footer-eyebrow"><span aria-hidden="true">✈︎</span> ЕВРОПА / АЗИЯ / ГДЕ УГОДНО</span><h2>Мир больше,<br><em>чем планы.</em></h2><p>Выбери направление и лети за новыми историями.</p><a class="footer-search" href="#flight-search">Найти свой маршрут</a></div><div class="footer-airlines"><span class="footer-airlines-label">ПЕРЕЙТИ К АВИАКОМПАНИИ</span><a class="footer-airline footer-wizz" href="https://www.wizzair.com/" target="_blank" rel="noopener noreferrer"><span class="footer-airline-mark" aria-hidden="true">W</span><span><small>ИСКАТЬ БИЛЕТЫ НА</small><strong>Wizz Air</strong></span></a><a class="footer-airline footer-ryanair" href="https://www.ryanair.com/" target="_blank" rel="noopener noreferrer"><span class="footer-airline-mark" aria-hidden="true">R</span><span><small>ИСКАТЬ БИЛЕТЫ НА</small><strong>Ryanair</strong></span></a></div></div><div class="footer-base"><a class="brand" href="#top" aria-label="Further — наверх"><img class="brand-mark" src="./assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a><p>Цены билетов здесь не отображаются. Актуальность рейсов и условия покупки проверяйте на сайте авиакомпании.</p><a class="back-top" href="#top" aria-label="Наверх страницы">Наверх</a></div></footer>
+</body>
+</html>
