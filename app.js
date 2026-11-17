@@ -489,19 +489,25 @@ if ('IntersectionObserver' in window) {
 }
 
 
-// Reading progress: fill only the traveled portion of the page.
+// Reading progress: update the fill width from the real document scroll position.
 (() => {
   const progressBar = document.getElementById('home-reading-progress-bar');
   if (!progressBar) return;
 
-  const scrollingElement = document.scrollingElement || document.documentElement;
   let frameRequested = false;
-
   const updateProgress = () => {
-    const maxScroll = scrollingElement.scrollHeight - scrollingElement.clientHeight;
-    const currentScroll = Math.max(0, scrollingElement.scrollTop);
-    const progress = maxScroll > 0 ? Math.min(1, currentScroll / maxScroll) : 0;
-    progressBar.style.transform = `scaleX(${progress})`;
+    const root = document.documentElement;
+    const scrollTop = window.scrollY || root.scrollTop || document.body.scrollTop || 0;
+    const scrollableHeight = Math.max(
+      document.body.scrollHeight,
+      root.scrollHeight,
+      document.body.offsetHeight,
+      root.offsetHeight
+    ) - window.innerHeight;
+    const progress = scrollableHeight > 0
+      ? Math.min(100, Math.max(0, (scrollTop / scrollableHeight) * 100))
+      : 0;
+    progressBar.style.width = progress + '%';
     frameRequested = false;
   };
 
@@ -513,10 +519,7 @@ if ('IntersectionObserver' in window) {
 
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate, { passive: true });
-  window.addEventListener('pageshow', scheduleUpdate);
   window.addEventListener('load', scheduleUpdate);
-  document.querySelectorAll('img').forEach((image) => {
-    if (!image.complete) image.addEventListener('load', scheduleUpdate, { once: true });
-  });
+  window.addEventListener('pageshow', scheduleUpdate);
   scheduleUpdate();
 })();
