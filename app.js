@@ -119,9 +119,10 @@ $('#destination-grid').innerHTML = destinations.map((item, index) => `
   <article class="destination-card tone-${item.tone} reveal" data-region="${item.region}" style="--delay:${(index % 4) * 60}ms">
     <button class="destination-action" type="button" data-code="${item.code}" data-name="${item.search}" aria-label="Выбрать направление: ${item.name}">
       <span class="card-photo"><img src="./assets/${item.image}.webp" alt="${item.alt}" loading="lazy"><span class="card-badge">${item.country}</span></span>
-      <span class="card-body"><span><small>${pad(index + 1)} / ${item.region === 'europe' ? 'ЕВРОПА' : 'АЗИЯ'}</small><strong>${item.name}</strong><span class="card-description">${item.description}</span>${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : ''}</span></span>
+      <span class="card-body"><span><small>${pad(index + 1)} / ${item.region === 'europe' ? 'ЕВРОПА' : 'АЗИЯ'}</small><strong>${item.name}</strong><span class="card-description">${item.description}</span></span></span>
       <span class="card-details"><span><small>АЭРОПОРТЫ</small><strong>${item.airports}</strong></span><span><small>ЧТО ПОСМОТРЕТЬ</small><strong>${item.idea}</strong></span></span>
     </button>
+    ${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : ''}
     <button class="favorite-toggle" type="button" data-favorite-code="${item.code}" aria-label="Добавить ${item.name} в избранное" aria-pressed="false">♡</button>
   </article>`).join('');
 
