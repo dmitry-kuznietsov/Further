@@ -7,6 +7,8 @@ flight:'Find flights',all:'All destinations',italy:'Italy',eyebrow:'ITALY · THE
 }
 };
 let lang='ru';
+let routeMap=null;
+let routeMarkers=[];
 const langButton=document.querySelector('#language-toggle');
 const themeButton=document.querySelector('#theme-toggle');
 function syncTheme(){
@@ -40,9 +42,44 @@ function initMap(){
  const node=document.querySelector('#rome-map');
  if(!node||!window.L)return;
  const map=L.map(node,{scrollWheelZoom:false}).setView([41.8955,12.4815],14);
+ routeMap=map;
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
- routePoints.forEach((point,index)=>L.marker(point.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+point.name+'</strong>'));
+ routePoints.forEach((point,index)=>{const marker=L.marker(point.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+point.name+'</strong>');routeMarkers.push(marker);});
  L.polyline(routePoints.map(point=>point.coords),{color:'#197db4',weight:4,opacity:.75,dashArray:'7 9'}).addTo(map);
  map.fitBounds(routePoints.map(point=>point.coords),{padding:[28,28]});
 }
 if(window.L)initMap();else window.addEventListener('load',initMap);
+
+/* Small interactions: reading progress, reveal-on-scroll and route/map sync */
+function initCityInteractions(){
+ const progress=document.querySelector('#city-reading-progress-bar');
+ const updateProgress=()=>{
+  if(!progress)return;
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(max>0?Math.min(100,window.scrollY/max*100):0)+'%';
+ };
+ window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+ const revealTargets=document.querySelectorAll('.city-section-heading,.city-sight,.city-food-section,.city-route-stops>div,.city-map-wrap,.city-tips,.city-bottom-cta');
+ if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  revealTargets.forEach(node=>node.classList.add('city-reveal'));
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+   if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+  }),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+  revealTargets.forEach(node=>observer.observe(node));
+ }else revealTargets.forEach(node=>node.classList.add('is-visible'));
+ document.querySelectorAll('[data-route-stop]').forEach(stop=>{
+  const activate=()=>{
+   const index=Number(stop.dataset.routeStop);
+   document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed',String(item===stop)));
+   if(routeMap&&routeMarkers[index]){
+    routeMap.flyTo(routePoints[index].coords,16,{duration:.7});
+    routeMarkers[index].openPopup();
+    document.querySelector('#rome-map')?.scrollIntoView({behavior:'smooth',block:'center'});
+   }
+  };
+  stop.addEventListener('click',activate);
+  stop.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+ });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initCityInteractions,{once:true});
+else initCityInteractions();
