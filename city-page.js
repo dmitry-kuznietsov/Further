@@ -151,6 +151,22 @@ function initPlanner(){
   ru:['Колизей и Форум','Капитолийский холм','Пантеон','Фонтан Треви','Трастевере'],
   en:['Colosseum & Forum','Capitoline Hill','The Pantheon','Trevi Fountain','Trastevere']
  };
+ const descriptions={
+  ru:[
+   'арены и руины, с которых начиналась история античного Рима',
+   'просторные виды на Форум и тихие уголки Капитолия',
+   'грандиозный купол и солнечный свет, падающий сквозь окулюс',
+   'знаменитый барочный фонтан и традиция бросать монетку',
+   'мощёные улочки, уютные траттории и вечерняя жизнь за Тибром'
+  ],
+  en:[
+   'ancient arenas and ruins at the heart of Roman history',
+   'sweeping views over the Forum and quiet corners of the Capitoline',
+   'a monumental dome and sunlight falling through the oculus',
+   'the famous Baroque fountain and its coin-toss tradition',
+   'cobbled lanes, cosy trattorias and evening life across the Tiber'
+  ]
+ };
  const selectedRouteIndexes=chosen=>chosen.flatMap(index=>index===0?[0,1]:[index+1]);
  const updatePlannerMap=chosen=>{
   if(!routeMap)return;
@@ -168,6 +184,12 @@ function initPlanner(){
  };
  const render=()=>{
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
+  const description=root.querySelector('#planner-description');
+  if(description){
+   description.textContent=chosen.length
+    ?(lang==='ru'?'В вашем плане: ':'Your plan: ')+chosen.map(index=>descriptions[lang][index]).join('; ')+'.'
+    :(lang==='ru'?'Пока ничего не выбрано. Отметьте места — и здесь появится короткое описание вашей прогулки.':'Nothing selected yet. Choose a few places to see a short description of your walk here.');
+  }
   list.innerHTML='';
   if(!chosen.length){
    const li=document.createElement('li');li.textContent=copy[lang].planEmpty;list.append(li);
