@@ -636,3 +636,36 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 /* Sight-card micro highlights instead of raw coordinates */
 .city-sight-note{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin-top:14px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface-soft);color:var(--accent);font-size:12px!important;font-weight:600;line-height:1.35!important;letter-spacing:.01em}
 .city-sight-note::before{content:"✦";font-size:11px;opacity:.8}
+
+
+/* Route cards: clear inset, visible lower edge and breathing room between stops */
+.city-route-stops .city-route-stop{
+  box-sizing:border-box;
+  padding:16px 20px 17px!important;
+  margin:0 0 12px!important;
+  border:1px solid var(--line)!important;
+  border-bottom:1px solid var(--line)!important;
+  border-radius:15px;
+  column-gap:13px!important;
+  row-gap:5px!important;
+  background:var(--surface);
+}
+.city-route-stops .city-route-stop:last-child{margin-bottom:0!important}
+.city-route-stops .city-route-stop>span{padding:0!important}
+.city-route-stops .city-route-stop strong{padding:0!important}
+.city-route-stops .city-route-stop small{grid-column:2;display:block}
+
+/* The planner description changes with the selected places */
+.city-planner-heading>p#planner-description{
+  max-width:470px;
+  padding:13px 16px;
+  border-left:2px solid var(--accent);
+  border-radius:0 12px 12px 0;
+  background:var(--surface-soft);
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.75;
+}
+@media(max-width:760px){
+  .city-planner-heading>p#planner-description{margin-top:14px;padding:12px 14px}
+}
