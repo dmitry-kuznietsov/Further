@@ -122,7 +122,7 @@ $('#destination-grid').innerHTML = destinations.map((item, index) => `
       <span class="card-body"><span><small>${pad(index + 1)} / ${item.region === 'europe' ? 'ЕВРОПА' : 'АЗИЯ'}</small><strong>${item.name}</strong><span class="card-description">${item.description}</span></span></span>
       <span class="card-details"><span><small>АЭРОПОРТЫ</small><strong>${item.airports}</strong></span><span><small>ЧТО ПОСМОТРЕТЬ</small><strong>${item.idea}</strong></span></span>
     </button>
-    ${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : ''}
+    ${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : item.code === 'KIX' ? '<a class="city-card-link" href="./cities/kyoto.html">Путеводитель по городу ↗</a>' : ''}
     <button class="favorite-toggle" type="button" data-favorite-code="${item.code}" aria-label="Добавить ${item.name} в избранное" aria-pressed="false">♡</button>
   </article>`).join('');
 
