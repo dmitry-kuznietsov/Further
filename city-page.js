@@ -203,7 +203,8 @@ function initPlanner(){
   time.textContent=chosen.length?Math.round(min/60)+'–'+Math.round(max/60)+' '+copy[lang].planHours:'—';
   updatePlannerMap(chosen);
  };
- document.addEventListener('city-language-change',render);\n checks.forEach(input=>input.addEventListener('change',render));
+ document.addEventListener('city-language-change',render);
+ checks.forEach(input=>input.addEventListener('change',render));
  root.querySelector('#planner-reset').addEventListener('click',()=>{checks.forEach(input=>input.checked=true);render();});
  root.querySelector('#planner-map').addEventListener('click',()=>{
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
