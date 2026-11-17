@@ -1119,7 +1119,7 @@ body:has(.city-main) .back-top:hover{
   will-change:transform;
 }
 
-/* Destination cards: clear but restrained hover, without distorting contents */
+/* Destination cards: neutral hover without coral outline or accent. */
 .destination-action{
   border-color:rgba(45,74,117,.08);
   box-shadow:0 4px 12px rgba(41,71,111,.07);
@@ -1128,8 +1128,8 @@ body:has(.city-main) .back-top:hover{
 .destination-action:hover,
 .destination-action:focus-visible{
   transform:translateY(-5px)!important;
-  border-color:rgba(241,118,104,.48)!important;
-  box-shadow:0 16px 32px rgba(41,71,111,.17),0 0 0 1px rgba(241,118,104,.12)!important;
+  border-color:var(--line)!important;
+  box-shadow:0 16px 32px rgba(41,71,111,.15)!important;
 }
 .card-photo img,
 .destination-action:hover .card-photo img{
