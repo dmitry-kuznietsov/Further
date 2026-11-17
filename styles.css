@@ -618,3 +618,7 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 .city-main .city-planner-heading>p{
   line-height:1.7;
 }
+
+
+/* Route stop list: remove divider lines between itinerary entries */
+.city-route-stops>div{border-bottom:0}
