@@ -973,3 +973,73 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
     border-color:color-mix(in srgb,var(--accent) 38%,var(--line));
   }
 }
+
+
+/* Rome page palette: warm coral accents throughout, balanced with the existing blue surfaces */
+body:has(.city-main){
+  --accent:#f17668;
+  --accent-soft:color-mix(in srgb,#f17668 17%,var(--surface));
+  --coral:#f17668;
+}
+body:has(.city-main) .brand-dot{color:#f17668}
+body:has(.city-main) .header-cta{
+  border-color:#f17668;
+  background:#f17668;
+  color:#fff;
+  transition:background .22s,border-color .22s,transform .22s,box-shadow .22s;
+}
+body:has(.city-main) .header-cta:hover{
+  border-color:#df6559;
+  background:#df6559;
+  box-shadow:0 8px 20px rgba(241,118,104,.2);
+}
+.city-main .city-hero-content .eyebrow,
+.city-main .city-planner-kicker,
+.city-main .city-section-heading h2 em,
+.city-main .city-food-copy h2 em,
+.city-main .city-tips h2 em,
+.city-main .city-planner-heading h2 em,
+.city-main .city-bottom-cta h2 em{
+  color:#f17668;
+}
+.city-main .city-hero-content h1 span{color:#f17668}
+.city-main .city-sight-note{
+  border-color:color-mix(in srgb,#f17668 24%,var(--line));
+  background:color-mix(in srgb,#f17668 9%,var(--surface-soft));
+  color:#e56b5e;
+}
+.city-main .city-route-stop[aria-pressed="true"]{
+  border-color:color-mix(in srgb,#f17668 58%,var(--line));
+  background:color-mix(in srgb,#f17668 8%,var(--surface));
+  box-shadow:inset 3px 0 0 #f17668,0 3px 12px rgba(241,118,104,.08);
+}
+.city-main .city-planner-options label.is-selected{
+  border-color:color-mix(in srgb,#f17668 30%,var(--line));
+  background:color-mix(in srgb,#f17668 9%,var(--surface));
+  box-shadow:inset 3px 0 0 #f17668;
+}
+.city-main .city-planner-result-top,
+.city-main .city-planner-result li::marker{color:#e56b5e}
+.city-main .city-planner-actions button{
+  border-color:#f17668;
+  background:#f17668;
+  color:#fff;
+}
+.city-main .city-planner-actions button+button{
+  background:transparent;
+  color:#e56b5e;
+}
+.city-main .city-planner-result.is-empty{outline-color:#f17668}
+.city-main .city-map-wrap a,
+.city-main .city-map-wrap button{accent-color:#f17668}
+.city-reading-progress span{background:#f17668;box-shadow:0 0 10px rgba(241,118,104,.32)}
+body:has(.city-main) .back-top:hover{
+  background:color-mix(in srgb,#f17668 13%,var(--surface));
+}
+html[data-theme="dark"] body:has(.city-main){
+  --accent:#f17668;
+  --accent-soft:color-mix(in srgb,#f17668 19%,var(--surface));
+  --coral:#f17668;
+}
+html[data-theme="dark"] .city-main .city-sight-note{color:#ff9b8f}
+html[data-theme="dark"] .city-main .city-planner-actions button+button{color:#ff9b8f}
