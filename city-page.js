@@ -68,6 +68,9 @@ function initCityInteractions(){
   }),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
   revealTargets.forEach(node=>observer.observe(node));
  }else revealTargets.forEach(node=>node.classList.add('is-visible'));
+ const clearActiveRouteStop=()=>{
+  document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed','false'));
+ };
  document.querySelectorAll('[data-route-stop]').forEach(stop=>{
   const activate=()=>{
    const index=Number(stop.dataset.routeStop);
@@ -81,6 +84,11 @@ function initCityInteractions(){
   stop.addEventListener('click',activate);
   stop.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
  });
+ // Clicking an empty area of the map or closing its popup clears the active stop.
+ if(routeMap){
+  routeMap.on('click',clearActiveRouteStop);
+  routeMap.on('popupclose',clearActiveRouteStop);
+ }
 }
 
 /* Personal walking-plan builder */
