@@ -472,7 +472,6 @@ destinationLess.addEventListener('click', () => {
   $('#destinations').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 renderDestinations();
-saveFavorites();
 $('.destination-action').forEach((button) => button.addEventListener('click', () => {
   destination.value = button.dataset.name; destination.dataset.code = button.dataset.code;
   showMessage(`${button.dataset.name.replace(/ \([A-Z]{3}\)$/, '')} выбран. Укажите город вылета и проверьте даты.`);
