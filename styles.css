@@ -1003,3 +1003,31 @@ body:has(.city-main) .back-top:hover{
   border-color:color-mix(in srgb,#f17668 35%,var(--line));
   background:color-mix(in srgb,#f17668 10%,var(--surface));
 }
+
+
+/* Homepage destination guide link: keep it in normal card flow */
+.destination-card:has(.city-card-link) .city-card-link{
+  position:relative;
+  left:auto;
+  bottom:auto;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:calc(100% - 18px);
+  min-height:42px;
+  margin:9px 9px 2px;
+  padding:9px 13px;
+  border-color:color-mix(in srgb,var(--accent) 24%,var(--line));
+  background:color-mix(in srgb,var(--accent-soft) 55%,var(--surface));
+  color:var(--accent);
+  font-size:12px;
+  line-height:1.25;
+  text-align:center;
+  white-space:normal;
+}
+.destination-card:has(.city-card-link) .city-card-link:hover{
+  gap:9px;
+  border-color:var(--accent);
+  background:var(--surface);
+}
