@@ -9,6 +9,7 @@ flight:'Find flights',all:'All destinations',italy:'Italy',eyebrow:'ITALY · THE
 let lang='ru';
 let routeMap=null;
 let routeMarkers=[];
+let routeLine=null;
 const langButton=document.querySelector('#language-toggle');
 const themeButton=document.querySelector('#theme-toggle');
 function syncTheme(){
@@ -45,7 +46,7 @@ function initMap(){
  routeMap=map;
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
  routePoints.forEach((point,index)=>{const marker=L.marker(point.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+point.name+'</strong>');routeMarkers.push(marker);});
- L.polyline(routePoints.map(point=>point.coords),{color:'#197db4',weight:4,opacity:.75,dashArray:'7 9'}).addTo(map);
+ routeLine=L.polyline(routePoints.map(point=>point.coords),{color:'#197db4',weight:4,opacity:.75,dashArray:'7 9'}).addTo(map);
  map.fitBounds(routePoints.map(point=>point.coords),{padding:[28,28]});
 }
 if(window.L)initMap();else window.addEventListener('load',initMap);
@@ -95,6 +96,21 @@ function initPlanner(){
   ru:['Колизей и Форум','Капитолийский холм','Пантеон','Фонтан Треви','Трастевере'],
   en:['Colosseum & Forum','Capitoline Hill','The Pantheon','Trevi Fountain','Trastevere']
  };
+ const selectedRouteIndexes=chosen=>chosen.flatMap(index=>index===0?[0,1]:[index+1]);
+ const updatePlannerMap=chosen=>{
+  if(!routeMap)return;
+  const indexes=selectedRouteIndexes(chosen);
+  routeMarkers.forEach((marker,index)=>{
+   if(indexes.includes(index)){if(!routeMap.hasLayer(marker))marker.addTo(routeMap);}
+   else if(routeMap.hasLayer(marker))routeMap.removeLayer(marker);
+  });
+  if(routeLine){routeMap.removeLayer(routeLine);routeLine=null;}
+  if(indexes.length>1){
+   const coords=indexes.map(index=>routePoints[index].coords);
+   routeLine=L.polyline(coords,{color:'#197db4',weight:4,opacity:.85,dashArray:'7 9'}).addTo(routeMap);
+   routeMap.fitBounds(coords,{padding:[35,35],maxZoom:15});
+  }else if(indexes.length===1){routeMap.setView(routePoints[indexes[0]].coords,16);}
+ };
  const render=()=>{
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
   list.innerHTML='';
@@ -108,6 +124,7 @@ function initPlanner(){
   const min=chosen.reduce((sum,i)=>sum+[150,45,45,30,90][i],0);
   const max=chosen.reduce((sum,i)=>sum+[180,60,60,45,120][i],0);
   time.textContent=chosen.length?Math.round(min/60)+'–'+Math.round(max/60)+' '+copy[lang].planHours:'—';
+  updatePlannerMap(chosen);
  };
  checks.forEach(input=>input.addEventListener('change',render));
  root.querySelector('#planner-reset').addEventListener('click',()=>{checks.forEach(input=>input.checked=true);render();});
@@ -115,11 +132,9 @@ function initPlanner(){
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
   if(!chosen.length){root.querySelector('.city-planner-result').classList.add('is-empty');return;}
   root.querySelector('.city-planner-result').classList.remove('is-empty');
-  if(routeMap){
-   const coords=chosen.map(index=>routePoints[index===0?0:index+1]?.coords||routePoints[index].coords);
-   routeMap.fitBounds(coords,{padding:[35,35],maxZoom:15});
-   chosen.forEach(index=>routeMarkers[index===0?0:index+1]?.openPopup());
-  }
+  updatePlannerMap(chosen);
+  const firstIndex=selectedRouteIndexes(chosen)[0];
+  if(firstIndex!==undefined)routeMarkers[firstIndex]?.openPopup();
   document.querySelector('#rome-map')?.scrollIntoView({behavior:'smooth',block:'center'});
  });
  render();
