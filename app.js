@@ -513,3 +513,24 @@ if ('IntersectionObserver' in window) {
   }), { threshold: 0.08, rootMargin: '0px 0px 80px 0px' });
   $$('.reveal').forEach((element) => observer.observe(element));
 }
+
+
+// Coral reading progress indicator on the homepage.
+const homeProgress = document.getElementById('home-reading-progress-bar');
+if (homeProgress) {
+  let progressTicking = false;
+  const updateHomeProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(100, Math.max(0, window.scrollY / scrollable * 100)) : 0;
+    homeProgress.style.width = progress + '%';
+    progressTicking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!progressTicking) {
+      window.requestAnimationFrame(updateHomeProgress);
+      progressTicking = true;
+    }
+  }, { passive: true });
+  window.addEventListener('resize', updateHomeProgress);
+  updateHomeProgress();
+}
