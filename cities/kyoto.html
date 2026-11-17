@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Путеводитель Further по Киото: храмы, сады, японская кухня и маршрут на один день.">
+<meta name="theme-color" content="#f6f8fc"><title>Киото — Further</title>
+<link rel="icon" href="../favicon-further.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('dalshe-theme')==='dark'?'dark':'light'}catch(e){}</script>
+<style>
+.kyoto-page{--kyoto:#b77b54;--kyoto-soft:#f2e5d9}
+.kyoto-page .city-breadcrumb{margin:8px 0 20px}
+.kyoto-hero{position:relative;min-height:570px;overflow:hidden;border-radius:34px;background:#53665b;color:white}
+.kyoto-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%}
+.kyoto-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,35,31,.78),rgba(20,35,31,.28) 62%,rgba(20,35,31,.08)),linear-gradient(0deg,rgba(20,35,31,.35),transparent 55%)}
+.kyoto-hero-content{position:relative;z-index:1;max-width:720px;padding:115px 7% 95px}
+.kyoto-hero .eyebrow{color:#f2c8a8;letter-spacing:.18em}
+.kyoto-hero h1{margin:0 0 20px;font-size:clamp(68px,10vw,128px);line-height:.92;letter-spacing:-.09em;font-weight:650}
+.kyoto-hero h1 span{color:#e9b58f}
+.kyoto-hero-content>p:not(.eyebrow){max-width:510px;color:rgba(255,255,255,.88);font-size:17px;line-height:1.7}
+.kyoto-hero-cta{display:inline-flex;margin-top:16px;padding:14px 20px;border:1px solid rgba(255,255,255,.55);border-radius:999px;color:white;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);font-size:13px;font-weight:700}
+.kyoto-hero-meta{position:absolute;z-index:2;right:34px;bottom:28px;color:white;font-size:11px;letter-spacing:.16em}
+.kyoto-intro{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;padding:82px 5% 65px}
+.kyoto-intro h2,.kyoto-section-head h2,.kyoto-food h2,.kyoto-planner h2{margin:0;font-size:clamp(36px,5vw,62px);line-height:1.04;letter-spacing:-.07em;font-weight:650}
+.kyoto-intro h2 em,.kyoto-section-head h2 em,.kyoto-food h2 em,.kyoto-planner h2 em{color:var(--kyoto);font-style:normal}
+.kyoto-intro p{margin:0;color:var(--muted);font-size:15px;line-height:1.85}
+.kyoto-section{padding:28px 0 70px}
+.kyoto-section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:26px}
+.kyoto-section-head .eyebrow,.kyoto-intro .eyebrow,.kyoto-food .eyebrow,.kyoto-planner .eyebrow{margin-bottom:13px;color:var(--kyoto)}
+.kyoto-section-head>p{max-width:330px;margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.kyoto-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:15px}
+.kyoto-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:23px;background:var(--surface);transition:transform .25s,border-color .25s}
+.kyoto-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--kyoto) 55%,var(--line))}
+.kyoto-card-photo{height:190px;position:relative;overflow:hidden;background:linear-gradient(135deg,#7d927b,#d7b89b)}
+.kyoto-card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.kyoto-card:hover .kyoto-card-photo img{transform:scale(1.035)}
+.kyoto-card-copy{padding:20px 21px 22px}
+.kyoto-card-copy small{color:var(--kyoto);font-size:10px;font-weight:800;letter-spacing:.14em}
+.kyoto-card h3{margin:10px 0 8px;font-size:20px;letter-spacing:-.04em}
+.kyoto-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.kyoto-feature{grid-row:span 2}
+.kyoto-feature .kyoto-card-photo{height:270px}
+.kyoto-feature .kyoto-card-copy{padding:24px}
+.kyoto-feature h3{font-size:25px}
+.kyoto-food{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;margin:12px 0 80px;padding:42px;border-radius:30px;background:var(--surface-soft)}
+.kyoto-food-visual{position:relative;min-height:370px;overflow:hidden;border-radius:22px;background:#c8b39b}
+.kyoto-food-visual img{position:absolute;width:100%;height:100%;object-fit:cover}
+.kyoto-food-copy>p{max-width:420px;color:var(--muted);font-size:14px;line-height:1.75}
+.kyoto-food-list{display:grid;gap:0;margin:25px 0 0;padding:0;list-style:none}
+.kyoto-food-list li{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-top:1px solid var(--line)}
+.kyoto-food-list strong{font-size:14px}.kyoto-food-list span{max-width:290px;color:var(--muted);text-align:right;font-size:12px;line-height:1.6}
+.kyoto-route{padding:10px 0 75px}
+.kyoto-route-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.kyoto-stops{display:grid;gap:9px}
+.kyoto-stop{display:grid;grid-template-columns:58px 1fr;gap:13px;padding:17px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+.kyoto-stop time{color:var(--kyoto);font-size:12px;font-weight:800}
+.kyoto-stop h3{margin:0 0 5px;font-size:15px}.kyoto-stop p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+#kyoto-map{min-height:520px;border:1px solid var(--line);border-radius:22px;z-index:1}
+.kyoto-planner{margin:0 0 75px;padding:38px;border-radius:28px;background:var(--surface);border:1px solid var(--line)}
+.kyoto-planner-top{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:23px}
+.kyoto-planner-top>p{max-width:330px;margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+.kyoto-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kyoto-choice{display:flex;align-items:flex-start;gap:11px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--surface-soft);cursor:pointer;transition:border-color .2s,background .2s}
+.kyoto-choice:has(input:checked){border-color:var(--kyoto);background:color-mix(in srgb,var(--kyoto-soft) 40%,var(--surface))}
+.kyoto-choice input{margin-top:4px;accent-color:var(--kyoto)}
+.kyoto-choice strong{display:block;font-size:13px}.kyoto-choice small{display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.45}
+.kyoto-plan-result{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.kyoto-plan-result strong{color:var(--ink)}
+.kyoto-tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:70px}
+.kyoto-tip{padding:20px;border-top:2px solid var(--kyoto);border-radius:0 0 16px 16px;background:var(--surface)}
+.kyoto-tip strong{display:block;margin-bottom:8px;font-size:14px}.kyoto-tip p{margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:800px){.kyoto-hero{min-height:510px}.kyoto-intro{grid-template-columns:1fr;gap:18px;padding:55px 3%}.kyoto-grid{grid-template-columns:1fr 1fr}.kyoto-feature{grid-row:auto;grid-column:span 2}.kyoto-feature .kyoto-card-photo{height:230px}.kyoto-food{grid-template-columns:1fr;gap:25px;padding:22px}.kyoto-food-visual{min-height:260px}.kyoto-route-layout{grid-template-columns:1fr}#kyoto-map{min-height:390px}.kyoto-choices{grid-template-columns:1fr 1fr}.kyoto-planner{padding:24px}.kyoto-section-head{align-items:start;flex-direction:column}}
+@media(max-width:520px){.kyoto-hero{min-height:470px;border-radius:23px}.kyoto-hero-content{padding:95px 25px 80px}.kyoto-hero-meta{right:20px;bottom:18px;font-size:9px}.kyoto-grid{grid-template-columns:1fr}.kyoto-feature{grid-column:auto}.kyoto-feature .kyoto-card-photo,.kyoto-card-photo{height:205px}.kyoto-food-list li{display:block}.kyoto-food-list span{display:block;max-width:none;margin-top:5px;text-align:left}.kyoto-choices{grid-template-columns:1fr}.kyoto-planner-top,.kyoto-plan-result{align-items:flex-start;flex-direction:column}.kyoto-tips{grid-template-columns:1fr}.kyoto-intro{padding:45px 2%}.kyoto-intro h2,.kyoto-section-head h2,.kyoto-food h2,.kyoto-planner h2{font-size:39px}}
+@media(prefers-reduced-motion:reduce){.kyoto-page *{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body class="kyoto-page">
+<a class="skip-link" href="#main">К содержимому</a>
+<header class="site-header shell">
+<a class="brand" href="../index.html#top"><img class="brand-mark" src="../assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a>
+<div class="header-actions"><button class="theme-toggle" id="language-toggle" type="button">EN</button><button class="theme-toggle" id="theme-toggle" type="button"><span class="theme-toggle-icon"></span><span class="theme-toggle-text">Тёмная тема</span></button><a class="header-cta" href="../index.html#flight-search" data-flight>Найти рейс</a></div>
+</header>
+<main id="main" class="city-main shell">
+<nav class="city-breadcrumb"><a href="../index.html#destinations">Все направления</a><span>/</span><span>Япония</span></nav>
+<section class="kyoto-hero">
+<img src="../assets/kyoto.webp" alt="Традиционный Киото среди зелени и старинной архитектуры" fetchpriority="high">
+<div class="kyoto-hero-content"><p class="eyebrow">ЯПОНИЯ · ГОРОД ТИШИНЫ И ТРАДИЦИЙ</p><h1>Киото<span>.</span></h1><p>Красные ворота среди леса, деревянные улочки Гиона и сады, в которых хочется задержаться. Киото раскрывается не спеша — шаг за шагом.</p><a class="kyoto-hero-cta" href="#kyoto-route">Пройти маршрут ↓</a></div><span class="kyoto-hero-meta">35°00′N · 135°46′E</span>
+</section>
+<section class="kyoto-intro"><div><p class="eyebrow">ПОЧУВСТВОВАТЬ ГОРОД</p><h2>Меньше спешки.<br><em>Больше деталей.</em></h2></div><p>Киото — бывшая столица Японии, где рядом существуют тихие дзен-сады, оживлённые торговые улицы и кварталы с деревянными фасадами. Лучший способ познакомиться с городом — выбрать один район на утро, оставить время на чай и не пытаться увидеть всё за день.</p></section>
+<section class="kyoto-section">
+<div class="kyoto-section-head"><div><p class="eyebrow">НЕ ПРОПУСТИТЬ</p><h2>Четыре лица<br><em>старого Киото.</em></h2></div><p>От прогулки сквозь тысячи тории до вечернего света над рекой Камо.</p></div>
+<div class="kyoto-grid">
+<article class="kyoto-card kyoto-feature"><div class="kyoto-card-photo"><img src="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=1100&q=85" alt="Красные ворота тории Фусими Инари" loading="lazy"></div><div class="kyoto-card-copy"><small>01 / ICONIC KYOTO</small><h3>Фусими Инари</h3><p>Тысячи алых ворот тории поднимаются по склону горы. Приходите рано утром: на нижних тропах будет заметно спокойнее. На короткую прогулку хватит часа, полный подъём займёт около 2–3 часов.</p></div></article>
+<article class="kyoto-card"><div class="kyoto-card-photo"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=85" alt="Историческая улица Киото" loading="lazy"></div><div class="kyoto-card-copy"><small>02 / OLD STREETS</small><h3>Гион и Хигасияма</h3><p>Деревянные фасады, переулки и чайные дома. Гуляйте пешком и уважайте частную жизнь местных жителей.</p></div></article>
+<article class="kyoto-card"><div class="kyoto-card-photo"><img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=85" alt="Золотой павильон Кинкаку-дзи" loading="lazy"></div><div class="kyoto-card-copy"><small>03 / GOLDEN REFLECTION</small><h3>Кинкаку-дзи</h3><p>Золотой павильон отражается в тихом пруду. Посещение компактное, но лучше приезжать к открытию.</p></div></article>
+<article class="kyoto-card"><div class="kyoto-card-photo"><img src="https://images.unsplash.com/photo-1518005020951-eccf7e9c6d8d?auto=format&fit=crop&w=800&q=85" alt="Бамбуковая роща Арасияма" loading="lazy"></div><div class="kyoto-card-copy"><small>04 / GREEN ESCAPE</small><h3>Бамбуковая роща Арасияма</h3><p>Высокие стебли бамбука и дорожки у подножия гор. Совместите с мостом Тогэцу и прогулкой вдоль реки.</p></div></article>
+</div></section>
+<section class="kyoto-food"><div class="kyoto-food-visual"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=85" alt="Японские блюда на столе" loading="lazy"></div><div class="kyoto-food-copy"><p class="eyebrow">ВКУС КИОТО</p><h2>Пауза на чай.<br><em>И что-нибудь вкусное.</em></h2><p>В Киото стоит пробовать не только суши: местная кухня тонкая, сезонная и часто построена вокруг овощей, бульонов и сои.</p><ul class="kyoto-food-list">
+<li><strong>Юдофу</strong><span>Нежный тофу, который подают в горячем бульоне — особенно хорош в районе храмов.</span></li>
+<li><strong>Кайсэки</strong><span>Сезонный набор небольших блюд, где важны вкус, подача и порядок подачи.</span></li>
+<li><strong>Матча и вагаси</strong><span>Зелёный чай с традиционными сладостями из фасолевой пасты.</span></li>
+<li><strong>Юба</strong><span>Нежная «кожица» соевого молока — попробуйте в супе или как отдельную закуску.</span></li>
+</ul></div></section>
+<section class="kyoto-route" id="kyoto-route">
+<div class="kyoto-section-head"><div><p class="eyebrow">ПРОГУЛКА НА ДЕНЬ</p><h2>Киото <em>по частям.</em></h2></div><p>Маршрут соединяет юг и восток города. Между районами удобнее перемещаться на метро или автобусе.</p></div>
+<div class="kyoto-route-layout"><div class="kyoto-stops">
+<div class="kyoto-stop"><time>07:30</time><div><h3>Фусими Инари</h3><p>Начните день среди красных ворот, пока на тропах тихо.</p></div></div>
+<div class="kyoto-stop"><time>10:30</time><div><h3>Сандзюсангэн-до</h3><p>Зал тысячи статуй Каннон и удивительная тишина внутри.</p></div></div>
+<div class="kyoto-stop"><time>12:00</time><div><h3>Хигасияма и обед</h3><p>Прогуляйтесь по старым улочкам и попробуйте местную кухню.</p></div></div>
+<div class="kyoto-stop"><time>15:00</time><div><h3>Киёми-дзу-дэра</h3><p>Храм на склоне с деревянной террасой и видом на город.</p></div></div>
+<div class="kyoto-stop"><time>18:00</time><div><h3>Гион и река Камо</h3><p>Закончите день неспешной прогулкой и ужином.</p></div></div>
+</div><div id="kyoto-map" aria-label="Карта маршрута по Киото"></div></div>
+</section>
+<section class="kyoto-planner">
+<div class="kyoto-planner-top"><div><p class="eyebrow">СОБЕРИТЕ СВОЙ ДЕНЬ</p><h2>Киото в вашем<br><em>ритме.</em></h2></div><p>Отметьте места, которые хочется увидеть. Мы посчитаем количество остановок и примерное время на посещение.</p></div>
+<div class="kyoto-choices">
+<label class="kyoto-choice"><input type="checkbox" value="Фусими Инари" data-hours="2"><span><strong>Фусими Инари</strong><small>1,5–2 часа · ворота тории</small></span></label>
+<label class="kyoto-choice"><input type="checkbox" value="Кинкаку-дзи" data-hours="1"><span><strong>Кинкаку-дзи</strong><small>Около часа · золотой павильон</small></span></label>
+<label class="kyoto-choice"><input type="checkbox" value="Арасияма" data-hours="2"><span><strong>Арасияма</strong><small>1,5–2 часа · бамбуковая роща</small></span></label>
+<label class="kyoto-choice"><input type="checkbox" value="Хигасияма" data-hours="2"><span><strong>Хигасияма</strong><small>1–2 часа · старые улочки</small></span></label>
+<label class="kyoto-choice"><input type="checkbox" value="Киёми-дзу-дэра" data-hours="1"><span><strong>Киёми-дзу-дэра</strong><small>Около часа · храм и панорама</small></span></label>
+<label class="kyoto-choice"><input type="checkbox" value="Гион" data-hours="1"><span><strong>Гион</strong><small>Около часа · вечерний квартал</small></span></label>
+</div>
+<div class="kyoto-plan-result"><span id="kyoto-plan-summary">Пока не выбрано ни одного места</span><strong id="kyoto-plan-time">0 ч</strong></div>
+</section>
+<div class="kyoto-section-head"><div><p class="eyebrow">ПОЛЕЗНО ЗНАТЬ</p><h2>Пара деталей,<br><em>которые помогут.</em></h2></div></div>
+<section class="kyoto-tips">
+<article class="kyoto-tip"><strong>Транспорт</strong><p>Для поездок между районами используйте метро и автобусы. В часы пик автобусы могут быть переполнены — закладывайте запас времени.</p></article>
+<article class="kyoto-tip"><strong>Этикет</strong><p>В храмах соблюдайте тишину, следуйте указателям и не фотографируйте там, где это запрещено.</p></article>
+<article class="kyoto-tip"><strong>Темп</strong><p>Киото кажется компактным, но районы разделяют расстояния. Не пытайтесь соединить Арасияму и восток города пешком.</p></article>
+</section>
+<section class="city-bottom-cta"><div><p class="eyebrow">СЛЕДУЮЩАЯ ОСТАНОВКА</p><h2>Киото уже ждёт.</h2><p>Выберите даты и проверьте варианты перелёта.</p></div><a class="header-cta" href="../index.html#flight-search">Найти рейс ↗</a></section>
+</main>
+<footer class="site-footer shell"><a class="brand" href="../index.html"><span>Further<span class="brand-dot">.</span></span></a><span>Путешествия начинаются с любопытства.</span><a href="#main">Наверх ↑</a></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(()=>{
+const root=document.documentElement,langButton=document.querySelector('#language-toggle'),themeButton=document.querySelector('#theme-toggle');
+const labels={ru:{flight:'Найти рейс',dark:'Тёмная тема',light:'Светлая тема'},en:{flight:'Find flights',dark:'Dark theme',light:'Light theme'}};
+let lang='ru';
+langButton.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';langButton.textContent=lang==='ru'?'EN':'RU';document.querySelectorAll('[data-flight]').forEach(a=>a.textContent=labels[lang].flight);themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;});
+themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('dalshe-theme',root.dataset.theme)}catch(e){}themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;});
+const checks=[...document.querySelectorAll('.kyoto-choice input')],summary=document.querySelector('#kyoto-plan-summary'),time=document.querySelector('#kyoto-plan-time');
+function updatePlan(){const chosen=checks.filter(c=>c.checked);summary.textContent=chosen.length?chosen.map(c=>c.value).join(' · '):'Пока не выбрано ни одного места';const hours=chosen.reduce((n,c)=>n+Number(c.dataset.hours),0);time.textContent=hours+' ч · '+chosen.length+' мест';}
+checks.forEach(c=>c.addEventListener('change',updatePlan));
+if(window.L){const map=L.map('kyoto-map',{scrollWheelZoom:false}).setView([35.006,135.766],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(map);const stops=[['Фусими Инари',34.9671,135.7727],['Сандзюсангэн-до',34.9875,135.7717],['Хигасияма',35.0037,135.7788],['Киёми-дзу-дэра',34.9949,135.785],['Гион',35.0037,135.7785]];const line=[];stops.forEach(([name,lat,lng],i)=>{L.marker([lat,lng]).addTo(map).bindPopup('<b>'+(i+1)+'. '+name+'</b>');line.push([lat,lng]);});L.polyline(line,{color:'#b77b54',weight:4,opacity:.8,dashArray:'7 8'}).addTo(map);L.control.scale({imperial:false}).addTo(map);}
+})();
+</script>
+</body></html>
