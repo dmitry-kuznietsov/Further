@@ -883,3 +883,50 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 @media(prefers-reduced-motion:reduce){
  .city-planner-option-detail{animation:none}
 }
+
+
+/* Tablet layout fixes: prevent planner text from overflowing narrow columns */
+@media (min-width:651px) and (max-width:900px){
+  .city-planner-panel{
+    grid-template-columns:minmax(0,1fr);
+    gap:14px;
+    padding:15px;
+  }
+  .city-planner-options{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+  .city-planner-options label{
+    min-width:0;
+    padding:12px;
+    overflow-wrap:anywhere;
+  }
+  .city-planner-options label>span,
+  .city-planner-option-copy{
+    min-width:0;
+  }
+  .city-planner-option-detail{
+    grid-template-columns:68px minmax(0,1fr);
+    gap:9px;
+  }
+  .city-planner-option-detail>img{
+    width:68px;
+    height:64px;
+  }
+  .city-planner-option-copy>span{
+    font-size:13px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+  }
+  .city-planner-result{min-width:0}
+  .city-planner-stats{flex-wrap:wrap;gap:12px 24px}
+  .city-route-stops>div{
+    grid-template-columns:50px minmax(0,1fr);
+    min-width:0;
+  }
+  .city-route-stops strong,
+  .city-route-stops small{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+}
