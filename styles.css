@@ -488,3 +488,25 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 @media(max-width:760px){.city-planner-heading{display:block}.city-planner-heading>p{margin-top:12px}.city-planner-panel{grid-template-columns:1fr}.city-planner-options{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.city-planner-options{grid-template-columns:1fr}.city-planner-panel{padding:11px}.city-planner-actions button{flex:1;padding:0 9px}}
 @media(prefers-reduced-motion:reduce){.city-planner-options label{transition:none}}
+
+
+/* City guide typography: improve paragraph and supporting-text readability */
+.city-hero-content>p:not(.eyebrow){font-size:16px;line-height:1.7}
+.city-section-heading>p,.city-planner-heading>p{font-size:14px;line-height:1.75}
+.city-sight p{font-size:13px;line-height:1.75}
+.city-sight small{font-size:11px}
+.city-food-list span{font-size:13px;line-height:1.65}
+.city-route-stops small{font-size:12px;line-height:1.65}
+.city-route-stops>div>span{font-size:12px}
+.city-map-wrap>p{font-size:11px}
+.city-tip-list p{font-size:13px;line-height:1.75}
+.city-bottom-cta p:not(.eyebrow){font-size:13px}
+.city-planner-options small{font-size:11px;line-height:1.55}
+.city-planner-result ol{font-size:13px;line-height:1.5}
+.city-planner-stats span{font-size:11px}
+@media(max-width:650px){
+ .city-hero-content>p:not(.eyebrow){font-size:15px}
+ .city-section-heading>p,.city-planner-heading>p{font-size:14px}
+ .city-sight p,.city-food-list span,.city-tip-list p{font-size:13px}
+ .city-route-stops small{font-size:12px}
+}
