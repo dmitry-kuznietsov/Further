@@ -1142,3 +1142,16 @@ body:has(.city-main) .back-top:hover{
   transform:none!important;
   backface-visibility:visible!important;
 }
+
+
+/* Live homepage progress: transform-based fill, independent of layout width. */
+.home-reading-progress{background:rgba(45,74,117,.14)!important;overflow:hidden!important}
+.home-reading-progress span{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .08s linear!important;
+}
+@media(prefers-reduced-motion:reduce){.home-reading-progress span{transition:none!important}}
