@@ -149,6 +149,7 @@
 .kyoto-page .kyoto-stop:last-child{margin-bottom:0}
 .kyoto-page .kyoto-stop:hover{transform:translateY(-2px);border-color:color-mix(in srgb,#f17668 38%,var(--line));box-shadow:0 8px 22px rgba(34,65,111,.07)}
 .kyoto-page .kyoto-stop time{padding-top:2px;color:var(--muted)!important;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.kyoto-page .kyoto-stop time{color:#f17668!important}
 .kyoto-page .kyoto-stop h3{margin:0 0 6px;font-size:16px;line-height:1.35}
 .kyoto-page .kyoto-stop p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
 .kyoto-page .kyoto-stop[aria-pressed="true"]{border-color:color-mix(in srgb,#f17668 48%,var(--line));background:color-mix(in srgb,#f17668 5%,var(--surface));box-shadow:inset 3px 0 #f17668,0 5px 16px rgba(34,65,111,.07)}
@@ -165,6 +166,46 @@
 @media(max-width:800px){.kyoto-page #kyoto-map{min-height:390px}}
 @media(max-width:520px){.kyoto-page .kyoto-stop{grid-template-columns:54px minmax(0,1fr);padding:15px!important}.kyoto-page .kyoto-stop p{font-size:13px}}
 
+
+/* Kyoto planner — Rome-style selection panel */
+.kyoto-page .kyoto-planner{padding:8px 0 52px}
+.kyoto-page .kyoto-planner-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:20px}
+.kyoto-page .kyoto-planner-kicker{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.14em}
+.kyoto-page .kyoto-planner-heading h2{margin:8px 0 0;font-size:clamp(36px,4vw,52px);line-height:1.02;letter-spacing:-.075em}
+.kyoto-page .kyoto-planner-heading>p{max-width:390px;margin:0 0 3px;color:var(--muted);font-size:14px;line-height:1.75}
+.kyoto-page .kyoto-planner-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.85fr);gap:16px;padding:17px;border:1px solid var(--line);border-radius:21px;background:var(--surface);box-shadow:0 12px 35px rgba(34,65,111,.05)}
+.kyoto-page .kyoto-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:9px}
+.kyoto-page .kyoto-choice{display:grid;grid-template-columns:16px minmax(0,1fr);align-content:start;gap:10px;min-width:0;min-height:72px;padding:13px;border:1px solid var(--line);border-radius:14px;background:transparent;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.kyoto-page .kyoto-choice:hover{transform:none;border-color:color-mix(in srgb,#f17668 48%,var(--line))}
+.kyoto-page .kyoto-choice input{width:16px;height:16px;margin:2px 0 0;accent-color:#f17668}
+.kyoto-page .kyoto-choice>span{display:grid;gap:4px;min-width:0}
+.kyoto-page .kyoto-choice strong{font-size:13px;line-height:1.35;color:var(--muted);font-weight:650}
+.kyoto-page .kyoto-choice small{font-size:11px;line-height:1.45;color:var(--muted)}
+.kyoto-page .kyoto-choice.is-selected{grid-template-columns:16px minmax(0,1fr);border-color:color-mix(in srgb,#f17668 45%,var(--line));background:color-mix(in srgb,#f17668 5%,var(--surface));box-shadow:inset 3px 0 #f17668}
+.kyoto-page .kyoto-choice.is-selected>span>strong{color:var(--ink)}
+.kyoto-page .kyoto-choice-detail{grid-column:2;display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:10px;min-width:0;padding-top:9px;animation:kyoto-plan-in .22s ease-out both}
+.kyoto-page .kyoto-choice-detail img{display:block;width:76px;height:68px;border-radius:10px;object-fit:cover}
+.kyoto-page .kyoto-choice-fact{display:grid;gap:4px;min-width:0;color:var(--muted);font-size:12px;line-height:1.5}
+.kyoto-page .kyoto-choice-fact b{color:var(--ink);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.kyoto-page .kyoto-planner-result{min-width:0;padding:17px;border-radius:16px;background:var(--surface-soft)}
+.kyoto-page .kyoto-planner-result-top{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.1em}
+.kyoto-page .kyoto-planner-result-top strong{padding:6px 9px;border-radius:99px;background:var(--surface);color:var(--ink);font-size:11px;letter-spacing:0}
+.kyoto-page #kyoto-plan-list{display:grid;gap:7px;margin:14px 0;padding-left:22px;font-size:13px;line-height:1.5;font-weight:700}
+.kyoto-page #kyoto-plan-list li::marker{color:#f17668}
+.kyoto-page .kyoto-planner-stats{display:flex;gap:28px;padding-top:12px;border-top:1px solid var(--line)}
+.kyoto-page .kyoto-planner-stats>div{display:grid;gap:3px}
+.kyoto-page .kyoto-planner-stats strong{font-size:18px;letter-spacing:-.04em}
+.kyoto-page .kyoto-planner-stats span{font-size:11px;color:var(--muted)}
+.kyoto-page .kyoto-planner-actions{display:flex;gap:8px;margin-top:15px}
+.kyoto-page .kyoto-planner-actions button{min-height:37px;padding:0 13px;border:1px solid #f17668;border-radius:99px;background:#f17668;color:#fff;font:inherit;font-size:11px;font-weight:800;cursor:pointer;transition:transform .2s,background .2s}
+.kyoto-page .kyoto-planner-actions button:hover{transform:translateY(-2px);background:#e96b5d}
+.kyoto-page .kyoto-planner-actions button+button{background:transparent;color:#f17668}
+.kyoto-page .kyoto-planner-actions button+button:hover{background:rgba(241,118,104,.08)}
+@keyframes kyoto-plan-in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.kyoto-page .kyoto-planner-panel{grid-template-columns:1fr}.kyoto-page .kyoto-planner-result{min-width:0}}
+@media(max-width:650px){.kyoto-page .kyoto-planner-heading{display:block}.kyoto-page .kyoto-planner-heading>p{margin-top:12px}.kyoto-page .kyoto-choices{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.kyoto-page .kyoto-choices{grid-template-columns:1fr}.kyoto-page .kyoto-planner-panel{padding:11px}.kyoto-page .kyoto-choice-detail{grid-template-columns:68px minmax(0,1fr)}.kyoto-page .kyoto-choice-detail img{width:68px;height:64px}.kyoto-page .kyoto-planner-actions button{flex:1;padding:0 9px}}
+@media(prefers-reduced-motion:reduce){.kyoto-page .kyoto-choice-detail{animation:none}.kyoto-page .kyoto-planner-actions button{transition:none}}
 </style>
 </head>
 <body class="kyoto-page">
@@ -204,17 +245,24 @@
 <div class="kyoto-stop" data-kyoto-stop="4" role="button" tabindex="0" aria-pressed="false"><time>18:00</time><div><h3>Гион и река Камо</h3><p>Закончите день неспешной прогулкой и ужином.</p></div></div>
 </div><div id="kyoto-map" aria-label="Карта маршрута по Киото"></div></div>
 </section>
-<section class="kyoto-planner">
-<div class="kyoto-planner-top"><div><p class="eyebrow">СОБЕРИТЕ СВОЙ ДЕНЬ</p><h2>Киото в вашем<br><em>ритме.</em></h2></div><p>Отметьте места, которые хочется увидеть. Мы посчитаем количество остановок и примерное время на посещение.</p></div>
-<div class="kyoto-choices">
-<label class="kyoto-choice"><input type="checkbox" value="Фусими Инари" data-hours="2"><span><strong>Фусими Инари</strong><small>1,5–2 часа · ворота тории</small></span></label>
-<label class="kyoto-choice"><input type="checkbox" value="Кинкаку-дзи" data-hours="1"><span><strong>Кинкаку-дзи</strong><small>Около часа · золотой павильон</small></span></label>
-<label class="kyoto-choice"><input type="checkbox" value="Арасияма" data-hours="2"><span><strong>Арасияма</strong><small>1,5–2 часа · бамбуковая роща</small></span></label>
-<label class="kyoto-choice"><input type="checkbox" value="Хигасияма" data-hours="2"><span><strong>Хигасияма</strong><small>1–2 часа · старые улочки</small></span></label>
-<label class="kyoto-choice"><input type="checkbox" value="Киёми-дзу-дэра" data-hours="1"><span><strong>Киёми-дзу-дэра</strong><small>Около часа · храм и панорама</small></span></label>
-<label class="kyoto-choice"><input type="checkbox" value="Гион" data-hours="1"><span><strong>Гион</strong><small>Около часа · вечерний квартал</small></span></label>
+<section class="kyoto-planner" id="kyoto-planner">
+<div class="kyoto-planner-heading"><div><span class="kyoto-planner-kicker">СОБЕРИТЕ СВОЙ ДЕНЬ</span><h2>Киото в вашем<br><em>ритме.</em></h2></div><p>Выберите места, которые хочется увидеть. У каждого — короткая заметка и фотография, а справа появится ваш план на день.</p></div>
+<div class="kyoto-planner-panel">
+ <div class="kyoto-choices">
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="0"><span><strong>Фусими Инари</strong><small>1,5–2 часа · тысячи ворот тории</small></span></label>
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="1"><span><strong>Кинкаку-дзи</strong><small>Около часа · Золотой павильон</small></span></label>
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="2"><span><strong>Арасияма</strong><small>1,5–2 часа · бамбуковая роща</small></span></label>
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="3"><span><strong>Хигасияма</strong><small>1–2 часа · старые улочки</small></span></label>
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="4"><span><strong>Киёми-дзу-дэра</strong><small>Около часа · храм над городом</small></span></label>
+  <label class="kyoto-choice"><input type="checkbox" data-plan-stop="5"><span><strong>Гион</strong><small>Около часа · вечерний квартал</small></span></label>
+ </div>
+ <aside class="kyoto-planner-result" aria-live="polite">
+  <div class="kyoto-planner-result-top"><span>ВАШ МАРШРУТ</span><strong id="kyoto-plan-count">0 мест</strong></div>
+  <ol id="kyoto-plan-list"><li>Выберите места слева</li></ol>
+  <div class="kyoto-planner-stats"><div><strong id="kyoto-plan-time">—</strong><span>на посещение</span></div><div><strong id="kyoto-plan-distance">—</strong><span>районов выбрано</span></div></div>
+  <div class="kyoto-planner-actions"><button type="button" id="kyoto-plan-map">Показать на карте</button><button type="button" id="kyoto-plan-all">Выбрать всё</button></div>
+ </aside>
 </div>
-<div class="kyoto-plan-result"><span id="kyoto-plan-summary">Пока не выбрано ни одного места</span><strong id="kyoto-plan-time">0 ч</strong></div>
 </section>
 <div class="kyoto-section-head"><div><p class="eyebrow">ПОЛЕЗНО ЗНАТЬ</p><h2>Пара деталей,<br><em>которые помогут.</em></h2></div></div>
 <section class="kyoto-tips">
@@ -233,16 +281,17 @@ const langButton=document.querySelector('#language-toggle');
 const themeButton=document.querySelector('#theme-toggle');
 const labels={ru:{flight:'Найти рейс',dark:'Тёмная тема',light:'Светлая тема'},en:{flight:'Find flights',dark:'Dark theme',light:'Light theme'}};
 let lang='ru';
-langButton.addEventListener('click',()=>{
+langButton?.addEventListener('click',()=>{
  lang=lang==='ru'?'en':'ru';
- langButton.textContent=lang==='ru'?'EN':'RU';
+ if(langButton)langButton.textContent=lang==='ru'?'EN':'RU';
  document.querySelectorAll('[data-flight]').forEach(a=>a.textContent=labels[lang].flight);
- themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
+ if(themeButton?.querySelector('.theme-toggle-text'))themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
 });
-themeButton.addEventListener('click',()=>{
+themeButton?.addEventListener('click',()=>{
  root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
  try{localStorage.setItem('dalshe-theme',root.dataset.theme)}catch(e){}
- themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
+ const text=themeButton.querySelector('.theme-toggle-text');
+ if(text)text.textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
 });
 const stops=[
  {name:'Фусими Инари',coords:[34.9671,135.7727],time:'07:30'},
@@ -251,7 +300,8 @@ const stops=[
  {name:'Киёми-дзу-дэра',coords:[34.9949,135.7850],time:'15:00'},
  {name:'Гион и река Камо',coords:[35.0037,135.7785],time:'18:00'}
 ];
-let map=null,markers=[],line=null,activeStop=null,mapSnapshot=null,internalPopupChange=false;
+let map=null,routeMarkers=[],routeLine=null,plannerMarkers=[],plannerLine=null;
+let activeStop=null,mapSnapshot=null,internalPopupChange=false;
 const routeCards=[...document.querySelectorAll('[data-kyoto-stop]')];
 const setActive=index=>{
  if(!routeCards[index])return;
@@ -261,63 +311,88 @@ const setActive=index=>{
 };
 const clearActive=()=>{
  if(activeStop===null)return;
- activeStop=null;
- routeCards.forEach(el=>el.setAttribute('aria-pressed','false'));
- if(map&&mapSnapshot){
-  const snapshot=mapSnapshot;mapSnapshot=null;
-  internalPopupChange=true;map.closePopup();map.flyTo(snapshot.center,snapshot.zoom,{duration:.55});internalPopupChange=false;
- }
+ activeStop=null;routeCards.forEach(el=>el.setAttribute('aria-pressed','false'));
+ if(map&&mapSnapshot){const snapshot=mapSnapshot;mapSnapshot=null;internalPopupChange=true;map.closePopup();map.flyTo(snapshot.center,snapshot.zoom,{duration:.55});internalPopupChange=false;}
 };
 const activateStop=index=>{
- if(!map||!markers[index]||activeStop===index)return;
- setActive(index);
- internalPopupChange=true;
- map.closePopup();
- map.flyTo(stops[index].coords,16,{duration:.65});
- markers[index].openPopup();
- internalPopupChange=false;
+ if(!map||!routeMarkers[index]||activeStop===index)return;
+ setActive(index);internalPopupChange=true;map.closePopup();map.flyTo(stops[index].coords,16,{duration:.65});routeMarkers[index].openPopup();internalPopupChange=false;
 };
 routeCards.forEach((card,index)=>{
- const activate=()=>activateStop(index);
- card.addEventListener('click',activate);
- card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+ card.addEventListener('click',()=>activateStop(index));
+ card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activateStop(index)}});
 });
-if(window.L){
+if(window.L&&document.querySelector('#kyoto-map')){
  map=L.map('kyoto-map',{scrollWheelZoom:false}).setView([35.000,135.778],12);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
- stops.forEach((stop,index)=>{
-  const marker=L.marker(stop.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+stop.name+'</strong><br>'+stop.time);
-  marker.on('click',()=>setActive(index));
-  markers.push(marker);
- });
- line=L.polyline(stops.map(s=>s.coords),{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);
+ stops.forEach((stop,index)=>{const marker=L.marker(stop.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+stop.name+'</strong><br>'+stop.time);marker.on('click',()=>setActive(index));routeMarkers.push(marker)});
+ routeLine=L.polyline(stops.map(s=>s.coords),{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);
  map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]});
- map.on('click',clearActive);
- map.on('popupclose',()=>{if(!internalPopupChange)clearActive()});
+ map.on('click',clearActive);map.on('popupclose',()=>{if(!internalPopupChange)clearActive()});
 }
-const checks=[...document.querySelectorAll('.kyoto-choice input')];
-const summary=document.querySelector('#kyoto-plan-summary'),time=document.querySelector('#kyoto-plan-time');
-const plannerCoords=[
- stops[0].coords,[35.0394,135.7292],[35.0094,135.6668],stops[2].coords,stops[3].coords,stops[4].coords
+const planItems=[
+ {name:'Фусими Инари',hours:1.75,coords:[34.9671,135.7727],photo:'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=420&q=80',fact:'Тысячи красных тории образуют тропу к вершине священной горы Инари.'},
+ {name:'Кинкаку-дзи',hours:1,coords:[35.0394,135.7292],photo:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=420&q=80',fact:'Верхние этажи павильона покрыты сусальным золотом, а отражение в пруду — один из самых узнаваемых видов Киото.'},
+ {name:'Арасияма',hours:1.75,coords:[35.0094,135.6668],photo:'https://images.unsplash.com/photo-1518005020951-eccf7e9c6d8d?auto=format&fit=crop&w=420&q=80',fact:'Бамбуковая роща особенно атмосферна ранним утром, пока дорожки ещё не заполнены.'},
+ {name:'Хигасияма',hours:1.5,coords:[35.0037,135.7788],photo:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=420&q=80',fact:'Исторический район сохранил узкие улочки, деревянные фасады и традиционные лавки.'},
+ {name:'Киёми-дзу-дэра',hours:1,coords:[34.9949,135.7850],photo:'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=420&q=80',fact:'Знаменитая деревянная терраса храма выступает над склоном и открывает панораму города.'},
+ {name:'Гион',hours:1,coords:[35.0037,135.7785],photo:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=420&q=80',fact:'Вечером в переулках Гиона загораются фонари; это исторический район чайных домов и традиционных искусств.'}
 ];
-function updatePlan(){
- const chosen=checks.map((c,i)=>c.checked?i:-1).filter(i=>i>=0);
- summary.textContent=chosen.length?chosen.map(i=>checks[i].value).join(' · '):'Пока не выбрано ни одного места';
- const hours=chosen.reduce((n,i)=>n+Number(checks[i].dataset.hours),0);
- time.textContent=hours+' ч · '+chosen.length+' мест';
- checks.forEach(c=>c.closest('.kyoto-choice')?.classList.toggle('is-selected',c.checked));
+const checks=[...document.querySelectorAll('[data-plan-stop]')];
+const list=document.querySelector('#kyoto-plan-list'),count=document.querySelector('#kyoto-plan-count'),time=document.querySelector('#kyoto-plan-time'),distance=document.querySelector('#kyoto-plan-distance');
+const clearPlannerMap=()=>{
  if(!map)return;
- markers.forEach((marker,i)=>{if(map.hasLayer(marker))map.removeLayer(marker)});
- if(line&&map.hasLayer(line))map.removeLayer(line);
- const coords=chosen.map(i=>plannerCoords[i]);
- coords.forEach((coord,i)=>{const marker=L.marker(coord).addTo(map).bindPopup('<strong>'+checks[chosen[i]].value+'</strong>');});
- if(coords.length>1){
-  line=L.polyline(coords,{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);
-  map.fitBounds(coords,{padding:[32,32],maxZoom:14});
- }else if(coords.length===1){map.setView(coords[0],15)}
- else{stops.forEach((s,i)=>markers[i].addTo(map));line=L.polyline(stops.map(s=>s.coords),{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]})}
-}
-checks.forEach(c=>c.addEventListener('change',updatePlan));
+ plannerMarkers.forEach(marker=>{if(map.hasLayer(marker))map.removeLayer(marker)});plannerMarkers=[];
+ if(plannerLine&&map.hasLayer(plannerLine))map.removeLayer(plannerLine);plannerLine=null;
+};
+const updatePlannerMap=chosen=>{
+ if(!map)return;
+ clearPlannerMap();
+ if(!chosen.length){
+  routeMarkers.forEach(marker=>{if(!map.hasLayer(marker))marker.addTo(map)});
+  if(routeLine&&!map.hasLayer(routeLine))routeLine.addTo(map);
+  map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]});
+  return;
+ }
+ routeMarkers.forEach(marker=>{if(map.hasLayer(marker))map.removeLayer(marker)});
+ if(routeLine&&map.hasLayer(routeLine))map.removeLayer(routeLine);
+ const points=chosen.map(i=>planItems[i].coords);
+ chosen.forEach(i=>{const item=planItems[i];plannerMarkers.push(L.marker(item.coords).addTo(map).bindPopup('<strong>'+item.name+'</strong><br>'+item.fact))});
+ if(points.length>1){plannerLine=L.polyline(points,{color:'#f17668',weight:4,opacity:.88,dashArray:'7 8'}).addTo(map);map.fitBounds(points,{padding:[34,34],maxZoom:14})}
+ else map.setView(points[0],15);
+};
+const renderPlanner=()=>{
+ const chosen=checks.filter(c=>c.checked).map(c=>Number(c.dataset.planStop)).filter(i=>planItems[i]);
+ checks.forEach(input=>{
+  const i=Number(input.dataset.planStop),label=input.closest('.kyoto-choice');if(!label||!planItems[i])return;
+  label.classList.toggle('is-selected',input.checked);
+  let detail=label.querySelector('.kyoto-choice-detail');
+  if(input.checked&&!detail){
+   const item=planItems[i];detail=document.createElement('div');detail.className='kyoto-choice-detail';
+   const img=document.createElement('img');img.src=item.photo;img.alt=item.name;img.loading='lazy';img.decoding='async';
+   const fact=document.createElement('span');fact.className='kyoto-choice-fact';
+   const tag=document.createElement('b');tag.textContent='ИНТЕРЕСНЫЙ ФАКТ';const copy=document.createElement('span');copy.textContent=item.fact;
+   fact.append(tag,copy);detail.append(img,fact);label.append(detail);
+  }else if(!input.checked&&detail)detail.remove();
+ });
+ list.innerHTML='';
+ if(!chosen.length){const li=document.createElement('li');li.textContent='Выберите места слева';list.append(li)}
+ else chosen.forEach(i=>{const li=document.createElement('li');li.textContent=planItems[i].name;list.append(li)});
+ count.textContent=chosen.length+' мест';
+ const hours=chosen.reduce((sum,i)=>sum+planItems[i].hours,0);
+ time.textContent=chosen.length?(hours%1?'около '+Math.floor(hours)+'–'+Math.ceil(hours)+' ч':hours+' ч'):'—';
+ distance.textContent=chosen.length+' из 6';
+ updatePlannerMap(chosen);
+};
+checks.forEach(input=>input.addEventListener('change',renderPlanner));
+document.querySelector('#kyoto-plan-all')?.addEventListener('click',()=>{checks.forEach(c=>c.checked=true);renderPlanner()});
+document.querySelector('#kyoto-plan-map')?.addEventListener('click',()=>{
+ const chosen=checks.filter(c=>c.checked).map(c=>Number(c.dataset.planStop));
+ if(!chosen.length){document.querySelector('.kyoto-planner-result')?.classList.add('is-empty');return}
+ document.querySelector('.kyoto-planner-result')?.classList.remove('is-empty');
+ updatePlannerMap(chosen);document.querySelector('#kyoto-map')?.scrollIntoView({behavior:'smooth',block:'center'});
+});
+renderPlanner();
 const revealTargets=document.querySelectorAll('.kyoto-hero,.kyoto-intro,.kyoto-section-head,.kyoto-card,.kyoto-food,.kyoto-route,.kyoto-planner,.kyoto-tips,.kyoto-tip,.city-bottom-cta');
 if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
  revealTargets.forEach(node=>node.classList.add('kyoto-reveal'));
