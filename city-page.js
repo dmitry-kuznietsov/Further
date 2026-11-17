@@ -186,9 +186,29 @@ function initPlanner(){
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
   const description=root.querySelector('#planner-description');
   if(description){
-   description.textContent=chosen.length
-    ?(lang==='ru'?'В вашем плане: ':'Your plan: ')+chosen.map(index=>descriptions[lang][index]).join('; ')+'.'
-    :(lang==='ru'?'Пока ничего не выбрано. Отметьте места — и здесь появится короткое описание вашей прогулки.':'Nothing selected yet. Choose a few places to see a short description of your walk here.');
+   description.replaceChildren();
+   if(chosen.length){
+    const lead=document.createElement('p');
+    lead.className='city-planner-descriptions-lead';
+    lead.textContent=lang==='ru'?'В вашем плане:':'Your plan:';
+    description.append(lead);
+    const items=document.createElement('ul');
+    chosen.forEach(index=>{
+     const item=document.createElement('li');
+     const name=document.createElement('strong');
+     const detail=document.createElement('span');
+     name.textContent=names[lang][index];
+     detail.textContent=descriptions[lang][index];
+     item.append(name,detail);
+     items.append(item);
+    });
+    description.append(items);
+   }else{
+    const empty=document.createElement('p');
+    empty.className='city-planner-descriptions-empty';
+    empty.textContent=lang==='ru'?'Пока ничего не выбрано. Отметьте места — и здесь появится описание прогулки.':'Nothing selected yet. Choose places to see your walk take shape here.';
+    description.append(empty);
+   }
   }
   list.innerHTML='';
   if(!chosen.length){
