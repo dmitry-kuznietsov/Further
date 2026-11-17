@@ -167,6 +167,31 @@
 @media(max-width:520px){.kyoto-page .kyoto-stop{grid-template-columns:54px minmax(0,1fr);padding:15px!important}.kyoto-page .kyoto-stop p{font-size:13px}}
 
 
+
+/* Spacing and footer polish */
+.kyoto-page .kyoto-planner{padding-top:34px;padding-bottom:76px}
+.kyoto-page .kyoto-planner-heading{padding:0 8px 18px;gap:36px;align-items:flex-end}
+.kyoto-page .kyoto-planner-heading>div{min-width:0;padding:5px 0 8px}
+.kyoto-page .kyoto-planner-kicker{display:inline-block;margin-bottom:8px;line-height:1.5}
+.kyoto-page .kyoto-planner-heading h2{margin:0;line-height:1.16;letter-spacing:-.065em}
+.kyoto-page .kyoto-planner-heading h2 em{display:inline-block;margin-top:3px;padding-bottom:5px}
+.kyoto-page .kyoto-planner-heading>p{max-width:390px;margin:0 0 9px;line-height:1.85}
+.kyoto-page .kyoto-planner-panel{padding:22px;gap:18px}
+.kyoto-page .site-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 28px;margin-top:64px;padding:26px 0 30px;border-top:1px solid var(--line);line-height:1.6}
+.kyoto-page .site-footer .brand{flex:0 0 auto}
+.kyoto-page .site-footer>span{flex:1 1 260px;min-width:0;color:var(--muted);font-size:13px}
+.kyoto-page .site-footer>a:last-child{flex:0 0 auto;color:var(--ink);font-size:13px;font-weight:700;white-space:nowrap;transition:color .2s,transform .2s}
+.kyoto-page .site-footer>a:last-child:hover{color:#f17668;transform:translateY(-2px)}
+@media(max-width:650px){
+ .kyoto-page .kyoto-planner{padding-top:20px;padding-bottom:54px}
+ .kyoto-page .kyoto-planner-heading{padding:0 3px 14px;gap:12px}
+ .kyoto-page .kyoto-planner-heading h2{line-height:1.13}
+ .kyoto-page .kyoto-planner-panel{padding:13px}
+ .kyoto-page .site-footer{justify-content:flex-start;gap:12px 18px;margin-top:42px;padding:22px 0 26px}
+ .kyoto-page .site-footer .brand{flex-basis:100%}
+ .kyoto-page .site-footer>span{flex:1 1 100%}
+}
+
 /* Kyoto planner — Rome-style selection panel */
 .kyoto-page .kyoto-planner{padding:8px 0 52px}
 .kyoto-page .kyoto-planner-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:20px}
@@ -321,6 +346,9 @@ const activateStop=index=>{
 routeCards.forEach((card,index)=>{
  card.addEventListener('click',()=>activateStop(index));
  card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activateStop(index)}});
+});
+document.addEventListener('click',event=>{
+ if(activeStop!==null&&!event.target.closest('[data-kyoto-stop]'))clearActive();
 });
 if(window.L&&document.querySelector('#kyoto-map')){
  map=L.map('kyoto-map',{scrollWheelZoom:false}).setView([35.000,135.778],12);
