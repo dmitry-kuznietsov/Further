@@ -193,7 +193,7 @@
 }
 
 /* Kyoto planner — Rome-style selection panel */
-.kyoto-page .kyoto-planner{padding:8px 0 52px}
+.kyoto-page .kyoto-planner{padding:30px clamp(18px,3.2vw,42px) 52px}
 .kyoto-page .kyoto-planner-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:20px}
 .kyoto-page .kyoto-planner-kicker{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.14em}
 .kyoto-page .kyoto-planner-heading h2{margin:8px 0 0;font-size:clamp(36px,4vw,52px);line-height:1.02;letter-spacing:-.075em}
@@ -228,7 +228,7 @@
 .kyoto-page .kyoto-planner-actions button+button:hover{background:rgba(241,118,104,.08)}
 @keyframes kyoto-plan-in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){.kyoto-page .kyoto-planner-panel{grid-template-columns:1fr}.kyoto-page .kyoto-planner-result{min-width:0}}
-@media(max-width:650px){.kyoto-page .kyoto-planner-heading{display:block}.kyoto-page .kyoto-planner-heading>p{margin-top:12px}.kyoto-page .kyoto-choices{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.kyoto-page .kyoto-planner{padding:24px 16px 38px}.kyoto-page .kyoto-planner-heading{display:block}.kyoto-page .kyoto-planner-heading>p{margin-top:12px}.kyoto-page .kyoto-choices{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.kyoto-page .kyoto-choices{grid-template-columns:1fr}.kyoto-page .kyoto-planner-panel{padding:11px}.kyoto-page .kyoto-choice-detail{grid-template-columns:68px minmax(0,1fr)}.kyoto-page .kyoto-choice-detail img{width:68px;height:64px}.kyoto-page .kyoto-planner-actions button{flex:1;padding:0 9px}}
 @media(prefers-reduced-motion:reduce){.kyoto-page .kyoto-choice-detail{animation:none}.kyoto-page .kyoto-planner-actions button{transition:none}}
 </style>
