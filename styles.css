@@ -669,3 +669,61 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 @media(max-width:760px){
   .city-planner-heading>p#planner-description{margin-top:14px;padding:12px 14px}
 }
+
+
+/* Planner: selected places are presented as a readable, separated list */
+.city-planner-heading>div{min-width:0}
+.city-planner-heading>.city-planner-descriptions{
+  max-width:490px;
+  padding:15px 18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface-soft);
+  color:var(--text);
+}
+.city-planner-descriptions-lead{
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+.city-planner-descriptions ul{
+  display:grid;
+  gap:10px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.city-planner-descriptions li{
+  display:grid;
+  grid-template-columns:minmax(112px, auto) 1fr;
+  gap:4px 12px;
+  align-items:baseline;
+  padding-top:9px;
+  border-top:1px solid var(--line);
+}
+.city-planner-descriptions li:first-child{padding-top:0;border-top:0}
+.city-planner-descriptions li strong{
+  color:var(--text);
+  font-size:14px;
+  font-weight:750;
+}
+.city-planner-descriptions li span{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+.city-planner-descriptions-empty{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+@media(max-width:760px){
+ .city-planner-heading>.city-planner-descriptions{max-width:none;margin-top:16px}
+}
+@media(max-width:480px){
+ .city-planner-heading>.city-planner-descriptions{padding:13px 14px}
+ .city-planner-descriptions li{grid-template-columns:1fr;gap:2px}
+ .city-planner-descriptions li span{font-size:14px}
+}
