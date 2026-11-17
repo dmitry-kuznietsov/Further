@@ -1094,11 +1094,38 @@ body:has(.city-main) .back-top:hover{
   transition:width .08s linear;
 }
 
-/* Destination cards: no rotation, zoom or badge distortion on hover */
-.destination-action,
+/* Homepage progress: same coral treatment as the city guides */
+.home-reading-progress{
+  position:fixed!important;
+  z-index:10000!important;
+  top:0!important;
+  left:0!important;
+  width:100%!important;
+  height:3px!important;
+  display:block!important;
+  overflow:hidden;
+  pointer-events:none!important;
+}
+.home-reading-progress span{
+  display:block!important;
+  width:0;
+  height:100%!important;
+  background:#f17668!important;
+  box-shadow:0 0 10px rgba(241,118,104,.28)!important;
+  transition:width .08s linear;
+}
+
+/* Destination cards: clear but restrained hover, without distorting contents */
+.destination-action{
+  border-color:rgba(45,74,117,.08);
+  box-shadow:0 4px 12px rgba(41,71,111,.07);
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease!important;
+}
 .destination-action:hover,
 .destination-action:focus-visible{
-  transform:none!important;
+  transform:translateY(-5px)!important;
+  border-color:rgba(241,118,104,.48)!important;
+  box-shadow:0 16px 32px rgba(41,71,111,.17),0 0 0 1px rgba(241,118,104,.12)!important;
 }
 .card-photo img,
 .destination-action:hover .card-photo img{
