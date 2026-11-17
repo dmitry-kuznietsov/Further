@@ -1068,3 +1068,8 @@ body:has(.city-main) .back-top:hover{
 @media(prefers-reduced-motion:reduce){
   .home-reading-progress span{transition:none}
 }
+
+
+/* Destination cards: keep photography undistorted on hover */
+.destination-action:hover .card-photo img{transform:none!important}
+.card-photo img{transform:none!important;transition:none!important}
