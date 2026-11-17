@@ -377,9 +377,9 @@ const updatePlannerMap=chosen=>{
  if(!map)return;
  clearPlannerMap();
  if(!chosen.length){
-  routeMarkers.forEach(marker=>{if(!map.hasLayer(marker))marker.addTo(map)});
-  if(routeLine&&!map.hasLayer(routeLine))routeLine.addTo(map);
-  map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]});
+  routeMarkers.forEach(marker=>{if(map.hasLayer(marker))map.removeLayer(marker)});
+  if(routeLine&&map.hasLayer(routeLine))map.removeLayer(routeLine);
+  map.setView([35.000,135.778],12);
   return;
  }
  routeMarkers.forEach(marker=>{if(map.hasLayer(marker))map.removeLayer(marker)});
