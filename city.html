@@ -13,6 +13,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script><script src="./city-page.js" defer></script>
 </head>
 <body>
+<div class="city-reading-progress" aria-hidden="true"><span id="city-reading-progress-bar"></span></div>
 <a class="skip-link" href="#main">К содержимому</a>
 <header class="site-header shell">
 <a class="brand" href="./index.html#top"><img class="brand-mark" src="./assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a>
@@ -36,11 +37,11 @@
 </ul></div></section>
 <section class="city-section city-route-section" id="route"><div class="city-section-heading"><div><h2 data-i18n="routeTitle">Классический Рим<br><em>пешком.</em></h2></div><p data-i18n="routeLead">Маршрут соединяет главные места центра. На весь день с остановками на еду и кофе.</p></div>
 <div class="city-route-layout"><div class="city-route-stops">
-<div><span>09:00</span><strong data-i18n="stop1">Колизей и Форум</strong><small data-i18n="stop1copy">Начните пораньше, пока не жарко и меньше очередей</small></div>
-<div><span>11:30</span><strong data-i18n="stop2">Капитолийский холм</strong><small data-i18n="stop2copy">Панорама на Форум и короткая передышка</small></div>
-<div><span>13:00</span><strong data-i18n="stop3">Пантеон и обед</strong><small data-i18n="stop3copy">Паста в одной из боковых улиц исторического центра</small></div>
-<div><span>16:00</span><strong data-i18n="stop4">Фонтан Треви</strong><small data-i18n="stop4copy">Загляните по пути к площади Испании</small></div>
-<div><span>19:00</span><strong data-i18n="stop5">Трастевере</strong><small data-i18n="stop5copy">Закончите день ужином по ту сторону Тибра</small></div>
+<div class="city-route-stop" data-route-stop="0" role="button" tabindex="0" aria-pressed="false"><span>09:00</span><strong data-i18n="stop1">Колизей и Форум</strong><small data-i18n="stop1copy">Начните пораньше, пока не жарко и меньше очередей</small></div>
+<div class="city-route-stop" data-route-stop="1" role="button" tabindex="0" aria-pressed="false"><span>11:30</span><strong data-i18n="stop2">Капитолийский холм</strong><small data-i18n="stop2copy">Панорама на Форум и короткая передышка</small></div>
+<div class="city-route-stop" data-route-stop="2" role="button" tabindex="0" aria-pressed="false"><span>13:00</span><strong data-i18n="stop3">Пантеон и обед</strong><small data-i18n="stop3copy">Паста в одной из боковых улиц исторического центра</small></div>
+<div class="city-route-stop" data-route-stop="3" role="button" tabindex="0" aria-pressed="false"><span>16:00</span><strong data-i18n="stop4">Фонтан Треви</strong><small data-i18n="stop4copy">Загляните по пути к площади Испании</small></div>
+<div class="city-route-stop" data-route-stop="4" role="button" tabindex="0" aria-pressed="false"><span>19:00</span><strong data-i18n="stop5">Трастевере</strong><small data-i18n="stop5copy">Закончите день ужином по ту сторону Тибра</small></div>
 </div><div class="city-map-wrap"><div id="rome-map" aria-label="Карта достопримечательностей Рима"></div><p data-i18n="mapCaption">Точки маршрута на карте · OpenStreetMap</p></div></div></section>
 <section class="city-tips"><div><h2 data-i18n="tipsTitle">Несколько вещей,<br><em>которые упростят день.</em></h2></div><div class="city-tip-list">
 <p data-i18n="tip1"><strong>Билеты:</strong> Колизей и популярные музеи лучше бронировать на официальных сайтах заранее.</p>
