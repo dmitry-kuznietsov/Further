@@ -1094,7 +1094,7 @@ body:has(.city-main) .back-top:hover{
   transition:width .08s linear;
 }
 
-/* Homepage progress: same coral treatment as the city guides */
+/* Homepage reading progress: no static track, only a live fill. */
 .home-reading-progress{
   position:fixed!important;
   z-index:10000!important;
@@ -1104,15 +1104,19 @@ body:has(.city-main) .back-top:hover{
   height:3px!important;
   display:block!important;
   overflow:hidden;
+  background:transparent!important;
   pointer-events:none!important;
 }
 .home-reading-progress span{
   display:block!important;
-  width:0;
+  width:100%!important;
   height:100%!important;
   background:#f17668!important;
   box-shadow:0 0 10px rgba(241,118,104,.28)!important;
-  transition:width .08s linear;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .08s linear;
+  will-change:transform;
 }
 
 /* Destination cards: clear but restrained hover, without distorting contents */
