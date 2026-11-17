@@ -622,3 +622,8 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 
 /* Route stop list: remove divider lines between itinerary entries */
 .city-route-stops>div{border-bottom:0}
+
+
+/* Sight-card micro highlights instead of raw coordinates */
+.city-sight-note{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin-top:14px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface-soft);color:var(--accent);font-size:12px!important;font-weight:600;line-height:1.35!important;letter-spacing:.01em}
+.city-sight-note::before{content:"✦";font-size:11px;opacity:.8}
