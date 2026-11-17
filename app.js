@@ -123,7 +123,6 @@ $('#destination-grid').innerHTML = destinations.map((item, index) => `
       <span class="card-details"><span><small>АЭРОПОРТЫ</small><strong>${item.airports}</strong></span><span><small>ЧТО ПОСМОТРЕТЬ</small><strong>${item.idea}</strong></span></span>
     </button>
     ${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : item.code === 'KIX' ? '<a class="city-card-link" href="./cities/kyoto.html">Путеводитель по городу ↗</a>' : ''}
-    <button class="favorite-toggle" type="button" data-favorite-code="${item.code}" aria-label="Добавить ${item.name} в избранное" aria-pressed="false">♡</button>
   </article>`).join('');
 
 function showMessage(text, error = false) { message.textContent = text; message.classList.toggle('error', error); }
@@ -439,30 +438,6 @@ form.addEventListener('submit', (event) => {
   showMessage('Выберите Wizz Air или Ryanair для поиска рейсов.');
 });
 
-// Избранные направления сохраняются на этом устройстве.
-const FAVORITES_KEY = 'further-favorites';
-let favoriteCodes = new Set();
-try { favoriteCodes = new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]')); } catch (error) { favoriteCodes = new Set(); }
-function saveFavorites() {
-  try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favoriteCodes])); } catch (error) {}
-  $('#favorites-count').textContent = String(favoriteCodes.size);
-  $('.favorite-toggle').forEach((button) => {
-    const active = favoriteCodes.has(button.dataset.favoriteCode);
-    button.classList.toggle('is-favorite', active);
-    button.textContent = active ? '♥' : '♡';
-    button.setAttribute('aria-pressed', String(active));
-    button.setAttribute('aria-label', active ? 'Убрать из избранного' : 'Добавить в избранное');
-  });
-}
-$('#destination-grid').addEventListener('click', (event) => {
-  const button = event.target.closest('.favorite-toggle');
-  if (!button) return;
-  event.preventDefault(); event.stopPropagation();
-  const code = button.dataset.favoriteCode;
-  if (favoriteCodes.has(code)) favoriteCodes.delete(code); else favoriteCodes.add(code);
-  saveFavorites();
-  if (activeDestinationFilter === 'favorites') renderDestinations();
-});
 // Фильтры и постраничный показ карточек.
 const destinationCards = $$('.destination-card');
 const destinationMore = $('#destination-more');
@@ -470,16 +445,16 @@ const destinationLess = $('#destination-less');
 let activeDestinationFilter = 'all';
 let visibleDestinationCount = 8;
 function renderDestinations() {
-  const matching = destinationCards.filter((card) => activeDestinationFilter === 'all' || (activeDestinationFilter === 'favorites' ? favoriteCodes.has(card.querySelector('.destination-action').dataset.code) : card.dataset.region === activeDestinationFilter));
+  const matching = destinationCards.filter((card) => activeDestinationFilter === 'all' || card.dataset.region === activeDestinationFilter);
   let shown = 0;
   destinationCards.forEach((card) => {
-    const match = activeDestinationFilter === 'all' || (activeDestinationFilter === 'favorites' ? favoriteCodes.has(card.querySelector('.destination-action').dataset.code) : card.dataset.region === activeDestinationFilter);
+    const match = activeDestinationFilter === 'all' || card.dataset.region === activeDestinationFilter;
     card.hidden = !match || shown >= visibleDestinationCount;
     if (match) shown += 1;
   });
   const visible = Math.min(visibleDestinationCount, matching.length);
   const next = Math.min(8, matching.length - visible);
-  $('#destination-progress').textContent = activeDestinationFilter === 'favorites' && matching.length === 0 ? 'Пока нет избранных направлений' : `Показано ${visible} из ${matching.length}`;
+  $('#destination-progress').textContent = `Показано ${visible} из ${matching.length}`;
   $('#destination-more-count').textContent = `+${next}`;
   destinationMore.hidden = next === 0;
   destinationLess.hidden = visible <= 8;
