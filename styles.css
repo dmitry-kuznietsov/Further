@@ -620,8 +620,17 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
 }
 
 
-/* Route stop list: remove divider lines between itinerary entries */
-.city-route-stops>div{border-bottom:0}
+/* Route stop list: distinct cards with comfortable inner spacing */
+.city-route-stops>div{
+  padding:14px 16px;
+  margin:0 0 10px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--surface);
+}
+.city-route-stops>div:last-child{margin-bottom:0}
+.city-route-stops>div>span{padding-left:0}
+.city-route-stops strong{padding-left:0}
 
 
 /* Sight-card micro highlights instead of raw coordinates */
