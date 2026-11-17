@@ -114,6 +114,15 @@ const todayISO = iso(today);
 const dates = { departure: iso(addDays(today, 28)), return: iso(addDays(today, 35)) };
 let passengers = 1;
 
+const cityGuideSlugs = {
+  ROM: 'city.html', KIX: 'kyoto.html', LIS: 'lisbon.html', BKK: 'bangkok.html',
+  PAR: 'paris.html', SEL: 'seoul.html', BCN: 'barcelona.html', DPS: 'bali.html',
+  ATH: 'athens.html', SIN: 'singapore.html', IST: 'istanbul.html', HAN: 'hanoi.html',
+  AMS: 'amsterdam.html', TYO: 'tokyo.html', VIE: 'vienna.html', DXB: 'dubai.html',
+  PRG: 'prague.html', HKG: 'hongkong.html', BUD: 'budapest.html', KUL: 'kualalumpur.html',
+  MAD: 'madrid.html', DEL: 'delhi.html', BER: 'berlin.html', AUH: 'abudhabi.html'
+};
+
 // Генерация карточек направлений.
 $('#destination-grid').innerHTML = destinations.map((item, index) => `
   <article class="destination-card tone-${item.tone} reveal" data-region="${item.region}" style="--delay:${(index % 4) * 60}ms">
@@ -122,7 +131,7 @@ $('#destination-grid').innerHTML = destinations.map((item, index) => `
       <span class="card-body"><span><small>${pad(index + 1)} / ${item.region === 'europe' ? 'ЕВРОПА' : 'АЗИЯ'}</small><strong>${item.name}</strong><span class="card-description">${item.description}</span></span></span>
       <span class="card-details"><span><small>АЭРОПОРТЫ</small><strong>${item.airports}</strong></span><span><small>ЧТО ПОСМОТРЕТЬ</small><strong>${item.idea}</strong></span></span>
     </button>
-    ${item.code === 'ROM' ? '<a class="city-card-link" href="./city.html?city=ROM">Путеводитель по городу ↗</a>' : ''}
+    <a class="city-card-link" href="./${cityGuideSlugs[item.code] || `city.html?city=${item.code}`}" aria-label="Путеводитель по городу: ${item.name}">Путеводитель по городу ↗</a>
     <button class="favorite-toggle" type="button" data-favorite-code="${item.code}" aria-label="Добавить ${item.name} в избранное" aria-pressed="false">♡</button>
   </article>`).join('');
 
