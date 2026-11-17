@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f8fc"><meta name="description" content="Путеводитель по Риму от Further">
+<title>Рим — Further</title>
+<link rel="icon" href="./favicon-further.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('dalshe-theme')==='dark'?'dark':'light'}catch(e){}</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script><script src="./city-page.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">К содержимому</a>
+<header class="site-header shell">
+<a class="brand" href="./index.html#top"><img class="brand-mark" src="./assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a>
+<div class="header-actions"><button class="theme-toggle" id="language-toggle" type="button">EN</button><button class="theme-toggle" id="theme-toggle" type="button"><span class="theme-toggle-icon"></span><span class="theme-toggle-text">Тёмная тема</span></button><a class="header-cta" href="./index.html#flight-search" data-i18n="flight">Найти рейс</a></div>
+</header>
+<main id="main" class="city-main shell">
+<nav class="city-breadcrumb"><a href="./index.html#destinations" data-i18n="all">Все направления</a><span>/</span><span data-i18n="italy">Италия</span></nav>
+<section class="city-hero"><img class="city-hero-image" src="./assets/rome.webp" alt="Рим" fetchpriority="high"><div class="city-hero-overlay"></div><div class="city-hero-content"><p class="eyebrow" data-i18n="eyebrow">ИТАЛИЯ · ГОРОД ВЕЧНОЙ ИСТОРИИ</p><h1>Рим<span>.</span></h1><p data-i18n="intro">Город, где античные руины соседствуют с шумными площадями, а лучший план иногда — просто идти за ароматом свежей пасты.</p><a class="city-hero-cta" href="#route" data-i18n="routeCta">Открыть маршрут ↓</a></div><span class="city-hero-index">41°54′N · 12°29′E</span></section>
+<section class="city-intro-row"><div><p class="eyebrow muted" data-i18n="discover">ПОЧУВСТВОВАТЬ ГОРОД</p><h2 data-i18n="introTitle">Рим не нужно<br><em>торопить.</em></h2></div><p data-i18n="introCopy">Оставьте время на длинный обед, маленькие церкви и вечернюю прогулку вдоль Тибра. Исторический центр удобно исследовать пешком, с остановками на кофе и джелато.</p></section>
+<section class="city-section"><div class="city-section-heading"><div><p class="eyebrow muted" data-i18n="highlights">НЕ ПРОПУСТИТЬ</p><h2 data-i18n="sightsTitle">Истории на каждом<br><em>повороте.</em></h2></div><p data-i18n="sightsLead">Начните с античного центра, а затем сверните в кварталы, где Рим живёт сегодня.</p></div>
+<div class="city-sight-grid">
+<article class="city-sight city-sight-feature"><img src="./assets/rome.webp" alt="Древний Рим"><div><span>01 / ANCIENT ROME</span><h3 data-i18n="colosseum">Колизей и Римский форум</h3><p data-i18n="colosseumCopy">Главная сцена античного города. Бронируйте вход заранее и выделите на комплекс не меньше половины дня.</p></div></article>
+<article class="city-sight"><div class="city-sight-number">02</div><h3 data-i18n="pantheon">Пантеон</h3><p data-i18n="pantheonCopy">Зайдите внутрь ради огромного купола и света, который меняется в течение дня.</p><small>41.8986° N · 12.4769° E</small></article>
+<article class="city-sight"><div class="city-sight-number">03</div><h3 data-i18n="trevi">Фонтан Треви</h3><p data-i18n="treviCopy">Приходите рано утром или поздно вечером, когда площадь становится спокойнее.</p><small>41.9009° N · 12.4833° E</small></article>
+<article class="city-sight"><div class="city-sight-number">04</div><h3 data-i18n="trastevere">Трастевере</h3><p data-i18n="trastevereCopy">Узкие мощёные улицы, небольшие площади и траттории для неспешного вечера.</p><small>41.8897° N · 12.4690° E</small></article>
+</div></section>
+<section class="city-food-section"><div class="city-food-photo"><img src="./assets/rome.webp" alt="Улочки Рима"><span data-i18n="foodTag">ВКУС РИМА</span></div><div class="city-food-copy"><p class="eyebrow" data-i18n="eat">ПОПРОБОВАТЬ</p><h2 data-i18n="foodTitle">Сначала паста.<br><em>Потом ещё паста.</em></h2><ul class="city-food-list">
+<li><strong>Carbonara</strong><span data-i18n="carbonara">Яйцо, пекорино, гуанчале и чёрный перец — без сливок.</span></li>
+<li><strong>Cacio e pepe</strong><span data-i18n="cacio">Паста с пекорино и перцем: просто, но требует мастерства.</span></li>
+<li><strong>Supplì</strong><span data-i18n="suppli">Хрустящие рисовые шарики с сырной начинкой.</span></li>
+<li><strong>Gelato</strong><span data-i18n="gelato">Ищите джелатерии с натуральными цветами и сезонными вкусами.</span></li>
+</ul></div></section>
+<section class="city-section city-route-section" id="route"><div class="city-section-heading"><div><p class="eyebrow muted" data-i18n="walk">ПРОГУЛКА НА ДЕНЬ</p><h2 data-i18n="routeTitle">Классический Рим<br><em>пешком.</em></h2></div><p data-i18n="routeLead">Маршрут соединяет главные места центра. На весь день с остановками на еду и кофе.</p></div>
+<div class="city-route-layout"><div class="city-route-stops">
+<div><span>09:00</span><strong data-i18n="stop1">Колизей и Форум</strong><small data-i18n="stop1copy">Начните пораньше, пока не жарко и меньше очередей</small></div>
+<div><span>11:30</span><strong data-i18n="stop2">Капитолийский холм</strong><small data-i18n="stop2copy">Панорама на Форум и короткая передышка</small></div>
+<div><span>13:00</span><strong data-i18n="stop3">Пантеон и обед</strong><small data-i18n="stop3copy">Паста в одной из боковых улиц исторического центра</small></div>
+<div><span>16:00</span><strong data-i18n="stop4">Фонтан Треви</strong><small data-i18n="stop4copy">Загляните по пути к площади Испании</small></div>
+<div><span>19:00</span><strong data-i18n="stop5">Трастевере</strong><small data-i18n="stop5copy">Закончите день ужином по ту сторону Тибра</small></div>
+</div><div class="city-map-wrap"><div id="rome-map" aria-label="Карта достопримечательностей Рима"></div><p data-i18n="mapCaption">Точки маршрута на карте · OpenStreetMap</p></div></div></section>
+<section class="city-tips"><div><p class="eyebrow" data-i18n="tips">ПОЛЕЗНО ЗНАТЬ</p><h2 data-i18n="tipsTitle">Несколько вещей,<br><em>которые упростят день.</em></h2></div><div class="city-tip-list">
+<p data-i18n="tip1"><strong>Билеты:</strong> Колизей и популярные музеи лучше бронировать на официальных сайтах заранее.</p>
+<p data-i18n="tip2"><strong>Обувь:</strong> Брусчатка красивая, но неровная — удобные кроссовки пригодятся.</p>
+<p data-i18n="tip3"><strong>Вода:</strong> В городе есть питьевые фонтанчики nasoni, можно пополнять бутылку.</p>
+<p data-i18n="tip4"><strong>Темп:</strong> Не планируйте слишком много на один день — расстояния на карте обманчивы.</p>
+</div></section>
+<section class="city-bottom-cta"><div><p class="eyebrow" data-i18n="next">СЛЕДУЮЩАЯ ОСТАНОВКА</p><h2 data-i18n="ctaTitle">Рим уже ждёт.</h2><p data-i18n="ctaCopy">Выберите даты и проверьте варианты перелёта.</p></div><a href="./index.html#flight-search" class="header-cta" data-i18n="flight">Найти рейс</a></section>
+</main>
+<footer class="site-footer shell city-footer"><div class="footer-base"><a class="brand" href="./index.html#top"><img class="brand-mark" src="./assets/further-mark.svg" alt=""><span>Further<span class="brand-dot">.</span></span></a><p>Further · <span data-i18n="footer">Путешествия начинаются с любопытства.</span></p><a class="back-top" href="#main" data-i18n="top">Наверх</a></div></footer>
+</body></html>
