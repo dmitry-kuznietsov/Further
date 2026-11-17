@@ -69,47 +69,73 @@ function initCityInteractions(){
   revealTargets.forEach(node=>observer.observe(node));
  }else revealTargets.forEach(node=>node.classList.add('is-visible'));
  let routeStopMapSnapshot=null;
- let openingRoutePopup=false;
- let restoringRouteMap=false;
- const clearActiveRouteStop=()=>{
-  const active=document.querySelector('[data-route-stop][aria-pressed="true"]');
-  if(!active)return;
-  document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed','false'));
-  if(routeMap&&routeStopMapSnapshot&&!restoringRouteMap){
-   restoringRouteMap=true;
-   openingRoutePopup=true;
-   routeMap.closePopup();
-   const snapshot=routeStopMapSnapshot;
-   routeStopMapSnapshot=null;
-   routeMap.flyTo(snapshot.center,snapshot.zoom,{duration:.65});
-   openingRoutePopup=false;
-   restoringRouteMap=false;
-  }else routeStopMapSnapshot=null;
+ let internalPopupChange=false;
+ let activeRouteStop=null;
+ const routeStopForMarker=[0,0,1,2,3,4];
+ const routeStops=[...document.querySelectorAll('[data-route-stop]')];
+ const setActiveRouteStop=(index)=>{
+  if(!Number.isInteger(index)||!routeStops[index])return;
+  if(activeRouteStop===index)return;
+  if(activeRouteStop===null&&routeMap){
+   routeStopMapSnapshot={center:routeMap.getCenter(),zoom:routeMap.getZoom()};
+  }
+  activeRouteStop=index;
+  routeStops.forEach((item,i)=>item.setAttribute('aria-pressed',String(i===index)));
  };
- document.querySelectorAll('[data-route-stop]').forEach(stop=>{
+ const restoreMapView=()=>{
+  if(!routeMap||!routeStopMapSnapshot)return;
+  const snapshot=routeStopMapSnapshot;
+  routeStopMapSnapshot=null;
+  internalPopupChange=true;
+  routeMap.closePopup();
+  routeMap.flyTo(snapshot.center,snapshot.zoom,{duration:.65});
+  internalPopupChange=false;
+ };
+ const clearActiveRouteStop=()=>{
+  if(activeRouteStop===null)return;
+  activeRouteStop=null;
+  routeStops.forEach(item=>item.setAttribute('aria-pressed','false'));
+  restoreMapView();
+ };
+ routeStops.forEach(stop=>{
   const activate=()=>{
    const index=Number(stop.dataset.routeStop);
-   if(!routeMap||!routeMarkers[index])return;
-   if(!routeStopMapSnapshot){
-    routeStopMapSnapshot={center:routeMap.getCenter(),zoom:routeMap.getZoom()};
-   }
-   document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed',String(item===stop)));
-   // Re-open even when the same stop is clicked repeatedly.
-   openingRoutePopup=true;
+   // A second click on the already active stop is intentionally a no-op.
+   if(activeRouteStop===index)return;
+   if(!routeMap||!routeMarkers[index===0?0:index+1])return;
+   setActiveRouteStop(index);
+   const markerIndex=index===0?0:index+1;
+   internalPopupChange=true;
    routeMap.closePopup();
-   routeMap.flyTo(routePoints[index].coords,16,{duration:.7});
-   routeMarkers[index].openPopup();
-   openingRoutePopup=false;
+   routeMap.flyTo(routePoints[markerIndex].coords,16,{duration:.7});
+   routeMarkers[markerIndex].openPopup();
+   internalPopupChange=false;
    document.querySelector('#rome-map')?.scrollIntoView({behavior:'smooth',block:'center'});
   };
   stop.addEventListener('click',activate);
   stop.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
  });
- // Empty-map clicks and the popup close button clear the selection and restore the prior map view.
  if(routeMap){
+  // Clicking a marker highlights its matching itinerary item on the left.
+  routeMarkers.forEach((marker,markerIndex)=>{
+   marker.on('click',()=>{
+    const stopIndex=routeStopForMarker[markerIndex];
+    if(activeRouteStop===null&&routeMap){
+     routeStopMapSnapshot={center:routeMap.getCenter(),zoom:routeMap.getZoom()};
+    }
+    setActiveRouteStop(stopIndex);
+   });
+  });
+  // A blank map click or closing the popup clears the selection.
   routeMap.on('click',clearActiveRouteStop);
-  routeMap.on('popupclose',()=>{if(!openingRoutePopup)clearActiveRouteStop();});
+  routeMap.on('popupclose',()=>{if(!internalPopupChange)clearActiveRouteStop();});
  }
+ // Any click elsewhere on the page (not on a route item or map marker/popup) clears it too.
+ document.addEventListener('click',event=>{
+  if(activeRouteStop===null)return;
+  if(event.target.closest('[data-route-stop],.leaflet-marker-icon,.leaflet-popup,.leaflet-control'))return;
+  clearActiveRouteStop();
+ });
 }
 
 /* Personal walking-plan builder */
