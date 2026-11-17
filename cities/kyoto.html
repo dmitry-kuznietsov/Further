@@ -139,6 +139,32 @@
 @media(max-width:520px){.kyoto-page .kyoto-hero{min-height:490px;border-radius:23px}.kyoto-page .kyoto-grid{grid-template-columns:1fr}.kyoto-page .kyoto-card-photo,.kyoto-page .kyoto-feature .kyoto-card-photo{height:220px}.kyoto-page .kyoto-food{border-radius:22px}.kyoto-page .kyoto-food-visual{min-height:230px;height:230px}.kyoto-page .kyoto-food-copy{padding:25px 21px}.kyoto-page .kyoto-food-list li{display:grid;gap:5px}.kyoto-page .kyoto-food-list strong{flex:auto}.kyoto-page .kyoto-food-list span{text-align:left}}
 @media(prefers-reduced-motion:reduce){.kyoto-page .kyoto-reveal{opacity:1;transform:none;transition:none}.kyoto-page .kyoto-card,.kyoto-page .kyoto-hero>img,.kyoto-page .kyoto-food-visual img{transition:none}}
 
+
+/* Kyoto headings: coral is a detail, never a text colour */
+.kyoto-page .kyoto-intro h2 em,.kyoto-page .kyoto-section-head h2 em,.kyoto-page .kyoto-food h2 em,.kyoto-page .kyoto-planner h2 em{color:inherit!important;font-style:normal;position:relative}
+.kyoto-page .kyoto-intro h2 em:after,.kyoto-page .kyoto-section-head h2 em:after,.kyoto-page .kyoto-food h2 em:after,.kyoto-page .kyoto-planner h2 em:after{content:"";display:block;width:54px;height:4px;margin-top:12px;border-radius:5px;background:#f17668}
+.kyoto-page .kyoto-section-head .eyebrow,.kyoto-page .kyoto-intro .eyebrow,.kyoto-page .kyoto-food .eyebrow,.kyoto-page .kyoto-planner .eyebrow{color:var(--muted)!important}
+.kyoto-page .kyoto-card-copy small{color:var(--muted)!important}
+.kyoto-page .kyoto-stop{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);align-items:start;gap:14px;min-width:0;padding:17px 19px!important;margin:0 0 11px;border:1px solid var(--line);border-radius:15px;background:var(--surface);cursor:pointer;text-align:left;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease}
+.kyoto-page .kyoto-stop:last-child{margin-bottom:0}
+.kyoto-page .kyoto-stop:hover{transform:translateY(-2px);border-color:color-mix(in srgb,#f17668 38%,var(--line));box-shadow:0 8px 22px rgba(34,65,111,.07)}
+.kyoto-page .kyoto-stop time{padding-top:2px;color:var(--muted)!important;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.kyoto-page .kyoto-stop h3{margin:0 0 6px;font-size:16px;line-height:1.35}
+.kyoto-page .kyoto-stop p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+.kyoto-page .kyoto-stop[aria-pressed="true"]{border-color:color-mix(in srgb,#f17668 48%,var(--line));background:color-mix(in srgb,#f17668 5%,var(--surface));box-shadow:inset 3px 0 #f17668,0 5px 16px rgba(34,65,111,.07)}
+.kyoto-page .kyoto-stop[aria-pressed="true"] time{color:#f17668!important}
+.kyoto-page .kyoto-stops{gap:0}
+.kyoto-page .kyoto-planner-top .eyebrow{letter-spacing:.12em}
+.kyoto-page .kyoto-plan-result{align-items:flex-start;flex-direction:column;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--surface-soft)}
+.kyoto-page .kyoto-plan-result strong{color:var(--ink)!important;font-size:15px}
+.kyoto-page .kyoto-plan-result span{font-size:14px;line-height:1.6}
+.kyoto-page .kyoto-choice strong{font-size:14px}
+.kyoto-page .kyoto-choice small{font-size:12px}
+.kyoto-page .kyoto-choice:has(input:checked){border-color:color-mix(in srgb,#f17668 48%,var(--line));background:color-mix(in srgb,#f17668 5%,var(--surface));box-shadow:inset 3px 0 #f17668}
+.kyoto-page #kyoto-map{min-height:520px}
+@media(max-width:800px){.kyoto-page #kyoto-map{min-height:390px}}
+@media(max-width:520px){.kyoto-page .kyoto-stop{grid-template-columns:54px minmax(0,1fr);padding:15px!important}.kyoto-page .kyoto-stop p{font-size:13px}}
+
 </style>
 </head>
 <body class="kyoto-page">
@@ -169,13 +195,13 @@
 <li><strong>Юба</strong><span>Нежная «кожица» соевого молока — попробуйте в супе или как отдельную закуску.</span></li>
 </ul></div></section>
 <section class="kyoto-route" id="kyoto-route">
-<div class="kyoto-section-head"><div><p class="eyebrow">ПРОГУЛКА НА ДЕНЬ</p><h2>Киото <em>по частям.</em></h2></div><p>Маршрут соединяет юг и восток города. Между районами удобнее перемещаться на метро или автобусе.</p></div>
+<div class="kyoto-section-head"><div><p class="eyebrow">ВАШ МАРШРУТ · ПРОГУЛКА НА ДЕНЬ</p><h2>Киото <em>по частям.</em></h2></div><p>Маршрут соединяет юг и восток города. Между районами удобнее перемещаться на метро или автобусе.</p></div>
 <div class="kyoto-route-layout"><div class="kyoto-stops">
-<div class="kyoto-stop"><time>07:30</time><div><h3>Фусими Инари</h3><p>Начните день среди красных ворот, пока на тропах тихо.</p></div></div>
-<div class="kyoto-stop"><time>10:30</time><div><h3>Сандзюсангэн-до</h3><p>Зал тысячи статуй Каннон и удивительная тишина внутри.</p></div></div>
-<div class="kyoto-stop"><time>12:00</time><div><h3>Хигасияма и обед</h3><p>Прогуляйтесь по старым улочкам и попробуйте местную кухню.</p></div></div>
-<div class="kyoto-stop"><time>15:00</time><div><h3>Киёми-дзу-дэра</h3><p>Храм на склоне с деревянной террасой и видом на город.</p></div></div>
-<div class="kyoto-stop"><time>18:00</time><div><h3>Гион и река Камо</h3><p>Закончите день неспешной прогулкой и ужином.</p></div></div>
+<div class="kyoto-stop" data-kyoto-stop="0" role="button" tabindex="0" aria-pressed="false"><time>07:30</time><div><h3>Фусими Инари</h3><p>Начните день среди красных ворот, пока на тропах тихо.</p></div></div>
+<div class="kyoto-stop" data-kyoto-stop="1" role="button" tabindex="0" aria-pressed="false"><time>10:30</time><div><h3>Сандзюсангэн-до</h3><p>Зал тысячи статуй Каннон и удивительная тишина внутри.</p></div></div>
+<div class="kyoto-stop" data-kyoto-stop="2" role="button" tabindex="0" aria-pressed="false"><time>12:00</time><div><h3>Хигасияма и обед</h3><p>Прогуляйтесь по старым улочкам и попробуйте местную кухню.</p></div></div>
+<div class="kyoto-stop" data-kyoto-stop="3" role="button" tabindex="0" aria-pressed="false"><time>15:00</time><div><h3>Киёми-дзу-дэра</h3><p>Храм на склоне с деревянной террасой и видом на город.</p></div></div>
+<div class="kyoto-stop" data-kyoto-stop="4" role="button" tabindex="0" aria-pressed="false"><time>18:00</time><div><h3>Гион и река Камо</h3><p>Закончите день неспешной прогулкой и ужином.</p></div></div>
 </div><div id="kyoto-map" aria-label="Карта маршрута по Киото"></div></div>
 </section>
 <section class="kyoto-planner">
@@ -202,23 +228,102 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (()=>{
-const root=document.documentElement,langButton=document.querySelector('#language-toggle'),themeButton=document.querySelector('#theme-toggle');
+const root=document.documentElement;
+const langButton=document.querySelector('#language-toggle');
+const themeButton=document.querySelector('#theme-toggle');
 const labels={ru:{flight:'Найти рейс',dark:'Тёмная тема',light:'Светлая тема'},en:{flight:'Find flights',dark:'Dark theme',light:'Light theme'}};
 let lang='ru';
-langButton.addEventListener('click',()=>{lang=lang==='ru'?'en':'ru';langButton.textContent=lang==='ru'?'EN':'RU';document.querySelectorAll('[data-flight]').forEach(a=>a.textContent=labels[lang].flight);themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;});
-themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('dalshe-theme',root.dataset.theme)}catch(e){}themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;});
-const checks=[...document.querySelectorAll('.kyoto-choice input')],summary=document.querySelector('#kyoto-plan-summary'),time=document.querySelector('#kyoto-plan-time');
-function updatePlan(){const chosen=checks.filter(c=>c.checked);summary.textContent=chosen.length?chosen.map(c=>c.value).join(' · '):'Пока не выбрано ни одного места';const hours=chosen.reduce((n,c)=>n+Number(c.dataset.hours),0);time.textContent=hours+' ч · '+chosen.length+' мест';}
+langButton.addEventListener('click',()=>{
+ lang=lang==='ru'?'en':'ru';
+ langButton.textContent=lang==='ru'?'EN':'RU';
+ document.querySelectorAll('[data-flight]').forEach(a=>a.textContent=labels[lang].flight);
+ themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
+});
+themeButton.addEventListener('click',()=>{
+ root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+ try{localStorage.setItem('dalshe-theme',root.dataset.theme)}catch(e){}
+ themeButton.querySelector('.theme-toggle-text').textContent=root.dataset.theme==='dark'?labels[lang].light:labels[lang].dark;
+});
+const stops=[
+ {name:'Фусими Инари',coords:[34.9671,135.7727],time:'07:30'},
+ {name:'Сандзюсангэн-до',coords:[34.9875,135.7717],time:'10:30'},
+ {name:'Хигасияма и обед',coords:[35.0037,135.7788],time:'12:00'},
+ {name:'Киёми-дзу-дэра',coords:[34.9949,135.7850],time:'15:00'},
+ {name:'Гион и река Камо',coords:[35.0037,135.7785],time:'18:00'}
+];
+let map=null,markers=[],line=null,activeStop=null,mapSnapshot=null,internalPopupChange=false;
+const routeCards=[...document.querySelectorAll('[data-kyoto-stop]')];
+const setActive=index=>{
+ if(!routeCards[index])return;
+ if(activeStop===null&&map)mapSnapshot={center:map.getCenter(),zoom:map.getZoom()};
+ activeStop=index;
+ routeCards.forEach((el,i)=>el.setAttribute('aria-pressed',String(i===index)));
+};
+const clearActive=()=>{
+ if(activeStop===null)return;
+ activeStop=null;
+ routeCards.forEach(el=>el.setAttribute('aria-pressed','false'));
+ if(map&&mapSnapshot){
+  const snapshot=mapSnapshot;mapSnapshot=null;
+  internalPopupChange=true;map.closePopup();map.flyTo(snapshot.center,snapshot.zoom,{duration:.55});internalPopupChange=false;
+ }
+};
+const activateStop=index=>{
+ if(!map||!markers[index]||activeStop===index)return;
+ setActive(index);
+ internalPopupChange=true;
+ map.closePopup();
+ map.flyTo(stops[index].coords,16,{duration:.65});
+ markers[index].openPopup();
+ internalPopupChange=false;
+};
+routeCards.forEach((card,index)=>{
+ const activate=()=>activateStop(index);
+ card.addEventListener('click',activate);
+ card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+});
+if(window.L){
+ map=L.map('kyoto-map',{scrollWheelZoom:false}).setView([35.000,135.778],12);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
+ stops.forEach((stop,index)=>{
+  const marker=L.marker(stop.coords).addTo(map).bindPopup('<strong>'+(index+1)+'. '+stop.name+'</strong><br>'+stop.time);
+  marker.on('click',()=>setActive(index));
+  markers.push(marker);
+ });
+ line=L.polyline(stops.map(s=>s.coords),{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);
+ map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]});
+ map.on('click',clearActive);
+ map.on('popupclose',()=>{if(!internalPopupChange)clearActive()});
+}
+const checks=[...document.querySelectorAll('.kyoto-choice input')];
+const summary=document.querySelector('#kyoto-plan-summary'),time=document.querySelector('#kyoto-plan-time');
+const plannerCoords=[
+ stops[0].coords,[35.0394,135.7292],[35.0094,135.6668],stops[2].coords,stops[3].coords,stops[4].coords
+];
+function updatePlan(){
+ const chosen=checks.map((c,i)=>c.checked?i:-1).filter(i=>i>=0);
+ summary.textContent=chosen.length?chosen.map(i=>checks[i].value).join(' · '):'Пока не выбрано ни одного места';
+ const hours=chosen.reduce((n,i)=>n+Number(checks[i].dataset.hours),0);
+ time.textContent=hours+' ч · '+chosen.length+' мест';
+ checks.forEach(c=>c.closest('.kyoto-choice')?.classList.toggle('is-selected',c.checked));
+ if(!map)return;
+ markers.forEach((marker,i)=>{if(map.hasLayer(marker))map.removeLayer(marker)});
+ if(line&&map.hasLayer(line))map.removeLayer(line);
+ const coords=chosen.map(i=>plannerCoords[i]);
+ coords.forEach((coord,i)=>{const marker=L.marker(coord).addTo(map).bindPopup('<strong>'+checks[chosen[i]].value+'</strong>');});
+ if(coords.length>1){
+  line=L.polyline(coords,{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);
+  map.fitBounds(coords,{padding:[32,32],maxZoom:14});
+ }else if(coords.length===1){map.setView(coords[0],15)}
+ else{stops.forEach((s,i)=>markers[i].addTo(map));line=L.polyline(stops.map(s=>s.coords),{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);map.fitBounds(stops.map(s=>s.coords),{padding:[28,28]})}
+}
 checks.forEach(c=>c.addEventListener('change',updatePlan));
 const revealTargets=document.querySelectorAll('.kyoto-hero,.kyoto-intro,.kyoto-section-head,.kyoto-card,.kyoto-food,.kyoto-route,.kyoto-planner,.kyoto-tips,.kyoto-tip,.city-bottom-cta');
 if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
  revealTargets.forEach(node=>node.classList.add('kyoto-reveal'));
- const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
-  if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
- }),{threshold:.12,rootMargin:'0px 0px -45px 0px'});
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -45px 0px'});
  revealTargets.forEach(node=>observer.observe(node));
 }else revealTargets.forEach(node=>node.classList.add('is-visible'));
-if(window.L){const map=L.map('kyoto-map',{scrollWheelZoom:false}).setView([35.006,135.766],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(map);const stops=[['Фусими Инари',34.9671,135.7727],['Сандзюсангэн-до',34.9875,135.7717],['Хигасияма',35.0037,135.7788],['Киёми-дзу-дэра',34.9949,135.785],['Гион',35.0037,135.7785]];const line=[];stops.forEach(([name,lat,lng],i)=>{L.marker([lat,lng]).addTo(map).bindPopup('<b>'+(i+1)+'. '+name+'</b>');line.push([lat,lng]);});L.polyline(line,{color:'#f17668',weight:4,opacity:.85,dashArray:'7 8'}).addTo(map);L.control.scale({imperial:false}).addTo(map);}
 })();
 </script>
 </body></html>
