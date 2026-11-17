@@ -490,21 +490,30 @@ if ('IntersectionObserver' in window) {
 
 
 // Coral reading progress indicator on the homepage.
-const homeProgress = document.getElementById('home-reading-progress-bar');
-if (homeProgress) {
+(() => {
+  const homeProgress = document.getElementById('home-reading-progress-bar');
+  if (!homeProgress) return;
   let progressTicking = false;
   const updateHomeProgress = () => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollable > 0 ? Math.min(100, Math.max(0, window.scrollY / scrollable * 100)) : 0;
-    homeProgress.style.width = progress + '%';
+    const root = document.documentElement;
+    const scrollTop = Math.max(window.scrollY || 0, root.scrollTop || 0, document.body.scrollTop || 0);
+    const scrollable = Math.max(root.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(1, Math.max(0, scrollTop / scrollable)) : 0;
+    homeProgress.style.width = (progress * 100) + '%';
     progressTicking = false;
   };
-  window.addEventListener('scroll', () => {
-    if (!progressTicking) {
-      window.requestAnimationFrame(updateHomeProgress);
-      progressTicking = true;
-    }
-  }, { passive: true });
-  window.addEventListener('resize', updateHomeProgress);
-  updateHomeProgress();
-}
+  const requestUpdate = () => {
+    if (progressTicking) return;
+    progressTicking = true;
+    window.requestAnimationFrame(updateHomeProgress);
+  };
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  document.addEventListener('scroll', requestUpdate, { passive: true, capture: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+  window.addEventListener('pageshow', requestUpdate);
+  window.addEventListener('load', requestUpdate);
+  document.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) img.addEventListener('load', requestUpdate, { once: true });
+  });
+  requestUpdate();
+})();
