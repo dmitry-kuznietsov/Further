@@ -1031,3 +1031,40 @@ body:has(.city-main) .back-top:hover{
   border-color:var(--accent);
   background:var(--surface);
 }
+
+
+/* Homepage: coral reading progress and matching decorative accents */
+.home-reading-progress{
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  pointer-events:none;
+}
+.home-reading-progress span{
+  display:block;
+  width:0;
+  height:100%;
+  background:#f17668;
+  box-shadow:0 0 10px rgba(241,118,104,.28);
+  transition:width .08s linear;
+}
+.how-heading .eyebrow{color:#f17668}
+.how-heading h2 em{color:#f17668}
+.how-it-works::before{
+  border-color:rgba(241,118,104,.25);
+  box-shadow:0 0 0 48px rgba(241,118,104,.055),0 0 0 112px rgba(241,118,104,.035);
+}
+.how-it-works::after{border-color:rgba(241,118,104,.2)}
+.step-number,
+.step:nth-child(2) .step-number,
+.step:nth-child(3) .step-number{
+  background:rgba(241,118,104,.16);
+  color:#a94f46;
+}
+.step{border-color:rgba(241,118,104,.18)}
+@media(prefers-reduced-motion:reduce){
+  .home-reading-progress span{transition:none}
+}
