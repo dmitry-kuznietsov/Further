@@ -810,3 +810,76 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
  .city-planner-description-copy>span{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.city-planner-description-photo img{transition:none}}
+
+
+/* Planner: expand selected option cards in place */
+.city-planner-options label{
+  display:grid;
+  grid-template-columns:16px minmax(0,1fr);
+  align-content:start;
+  align-items:start;
+  gap:8px 10px;
+  transform:none!important;
+  transition:border-color .2s,background-color .2s;
+}
+.city-planner-options label:hover{transform:none!important}
+.city-planner-options label.is-selected{
+  border-color:color-mix(in srgb,var(--accent) 48%,var(--line));
+  background:var(--surface-soft);
+}
+.city-planner-options label>span{min-width:0}
+.city-planner-option-detail{
+  grid-column:2;
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  padding-top:9px;
+  animation:planner-detail-in .22s ease-out both;
+}
+.city-planner-option-detail>img{
+  display:block;
+  width:76px;
+  height:68px;
+  border-radius:10px;
+  object-fit:cover;
+  transform:none!important;
+  transition:none!important;
+}
+.city-planner-option-copy{
+  display:grid!important;
+  gap:5px!important;
+  min-width:0;
+}
+.city-planner-option-copy>span{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+.city-planner-option-copy>a{
+  width:fit-content;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.2;
+  text-decoration:none;
+  opacity:.75;
+}
+.city-planner-option-copy>a:hover{color:var(--accent);text-decoration:underline;opacity:1}
+@keyframes planner-detail-in{
+ from{opacity:0;transform:translateY(3px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:760px){
+ .city-planner-options{grid-template-columns:1fr 1fr}
+ .city-planner-option-detail{grid-template-columns:68px minmax(0,1fr);gap:8px}
+ .city-planner-option-detail>img{width:68px;height:64px}
+}
+@media(max-width:480px){
+ .city-planner-options{grid-template-columns:1fr}
+ .city-planner-option-detail{grid-template-columns:76px minmax(0,1fr)}
+ .city-planner-option-detail>img{width:76px;height:68px}
+}
+@media(prefers-reduced-motion:reduce){
+ .city-planner-option-detail{animation:none}
+}
