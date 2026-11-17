@@ -151,6 +151,13 @@ function initPlanner(){
   ru:['Колизей и Форум','Капитолийский холм','Пантеон','Фонтан Треви','Трастевере'],
   en:['Colosseum & Forum','Capitoline Hill','The Pantheon','Trevi Fountain','Trastevere']
  };
+ const photos=[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum%20in%20Rome%20(1).jpg?width=480',credit:'https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome_(1).jpg'},
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Foro%20Romano%20visto%20dal%20Vittoriano%20Roma.jpg?width=480',credit:'https://commons.wikimedia.org/wiki/File:Foro_Romano_visto_dal_Vittoriano_Roma.jpg'},
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Rome%20(IT)%2C%20Pantheon%20--%202013%20--%203572.jpg?width=480',credit:'https://commons.wikimedia.org/wiki/File:Rome_(IT),_Pantheon_--_2013_--_3572.jpg'},
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Fontaine%20Trevi%20-%20Rome.jpg?width=480',credit:'https://commons.wikimedia.org/wiki/File:Fontaine_Trevi_-_Rome.jpg'},
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/AlleyInTrastevereRome.jpg?width=480',credit:'https://commons.wikimedia.org/wiki/File:AlleyInTrastevereRome.jpg'}
+ ];
  const descriptions={
   ru:[
    'арены и руины, с которых начиналась история античного Рима',
@@ -192,17 +199,40 @@ function initPlanner(){
     lead.className='city-planner-descriptions-lead';
     lead.textContent=lang==='ru'?'В вашем плане:':'Your plan:';
     description.append(lead);
-    const items=document.createElement('ul');
+    const cards=document.createElement('div');
+    cards.className='city-planner-description-cards';
     chosen.forEach(index=>{
-     const item=document.createElement('li');
+     const card=document.createElement('article');
+     card.className='city-planner-description-card';
+     const photoLink=document.createElement('a');
+     photoLink.className='city-planner-description-photo';
+     photoLink.href=photos[index].credit;
+     photoLink.target='_blank';
+     photoLink.rel='noopener noreferrer';
+     photoLink.setAttribute('aria-label',(lang==='ru'?'Источник фотографии: ':'Photo source: ')+names[lang][index]);
+     const img=document.createElement('img');
+     img.src=photos[index].src;
+     img.alt=names[lang][index];
+     img.loading='lazy';
+     img.decoding='async';
+     photoLink.append(img);
+     const copyBlock=document.createElement('div');
+     copyBlock.className='city-planner-description-copy';
      const name=document.createElement('strong');
-     const detail=document.createElement('span');
      name.textContent=names[lang][index];
+     const detail=document.createElement('span');
      detail.textContent=descriptions[lang][index];
-     item.append(name,detail);
-     items.append(item);
+     const credit=document.createElement('a');
+     credit.className='city-planner-photo-credit';
+     credit.href=photos[index].credit;
+     credit.target='_blank';
+     credit.rel='noopener noreferrer';
+     credit.textContent=lang==='ru'?'Фото · Wikimedia Commons':'Photo · Wikimedia Commons';
+     copyBlock.append(name,detail,credit);
+     card.append(photoLink,copyBlock);
+     cards.append(card);
     });
-    description.append(items);
+    description.append(cards);
    }else{
     const empty=document.createElement('p');
     empty.className='city-planner-descriptions-empty';
