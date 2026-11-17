@@ -569,3 +569,52 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
   .city-section-heading{margin-bottom:20px}
   .city-section-heading>p{font-size:15px;line-height:1.7}
 }
+
+
+/* Rome guide: bring all supporting and secondary text up to 15px */
+.city-main .city-breadcrumb,
+.city-main .city-hero-content .eyebrow,
+.city-main .city-hero-index,
+.city-main .city-hero-cta,
+.city-main .city-section-heading>p,
+.city-main .city-sight p,
+.city-main .city-sight small,
+.city-main .city-sight-number,
+.city-main .city-sight-feature>div>span,
+.city-main .city-food-photo>span,
+.city-main .city-food-list strong,
+.city-main .city-food-list span,
+.city-main .city-route-stops>div>span,
+.city-main .city-route-stops strong,
+.city-main .city-route-stops small,
+.city-main .city-map-wrap>p,
+.city-main .city-tip-list p,
+.city-main .city-bottom-cta p:not(.eyebrow),
+.city-main .city-planner-kicker,
+.city-main .city-planner-heading>p,
+.city-main .city-planner-options strong,
+.city-main .city-planner-options small,
+.city-main .city-planner-result-top,
+.city-main .city-planner-result-top strong,
+.city-main .city-planner-result ol,
+.city-main .city-planner-stats span,
+.city-main .city-planner-actions button,
+.city-main .city-card-link{
+  font-size:15px;
+}
+.city-main .city-hero-content .eyebrow,
+.city-main .city-planner-kicker,
+.city-main .city-sight-number,
+.city-main .city-sight-feature>div>span,
+.city-main .city-food-photo>span,
+.city-main .city-planner-result-top{
+  letter-spacing:.06em;
+}
+.city-main .city-sight p,
+.city-main .city-route-stops small,
+.city-main .city-tip-list p,
+.city-main .city-food-list span,
+.city-main .city-section-heading>p,
+.city-main .city-planner-heading>p{
+  line-height:1.7;
+}
