@@ -930,3 +930,46 @@ html[data-theme="dark"] .tone-sand{--card:#3c3531;--card-muted:#c9b9ae}
     overflow-wrap:anywhere;
   }
 }
+
+
+/* Planner selection: quiet but unmistakable selected state */
+.city-planner-options label{
+  position:relative;
+  border-color:transparent;
+  background:var(--surface-soft);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--line) 72%,transparent);
+}
+.city-planner-options label:not(.is-selected){
+  background:transparent;
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.city-planner-options label.is-selected{
+  border-color:color-mix(in srgb,var(--accent) 28%,var(--line));
+  background:color-mix(in srgb,var(--accent-soft) 24%,var(--surface));
+  box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) 65%,transparent);
+}
+.city-planner-options label.is-selected>span>strong{
+  color:var(--ink);
+}
+.city-planner-options label:not(.is-selected)>span>strong{
+  color:var(--muted);
+  font-weight:600;
+}
+.city-planner-options label:not(.is-selected) .city-planner-option-detail{
+  display:none;
+}
+.city-planner-options input{
+  accent-color:var(--accent);
+}
+.city-planner-options label.is-selected input{
+  filter:drop-shadow(0 0 2px color-mix(in srgb,var(--accent) 28%,transparent));
+}
+@media(hover:hover){
+  .city-planner-options label:not(.is-selected):hover{
+    background:color-mix(in srgb,var(--surface-soft) 58%,transparent);
+    border-color:var(--line);
+  }
+  .city-planner-options label.is-selected:hover{
+    border-color:color-mix(in srgb,var(--accent) 38%,var(--line));
+  }
+}
