@@ -191,55 +191,44 @@ function initPlanner(){
  };
  const render=()=>{
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
-  const description=root.querySelector('#planner-description');
-  if(description){
-   description.replaceChildren();
-   if(chosen.length){
-    const lead=document.createElement('p');
-    lead.className='city-planner-descriptions-lead';
-    lead.textContent=lang==='ru'?'В вашем плане:':'Your plan:';
-    description.append(lead);
-    const cards=document.createElement('div');
-    cards.className='city-planner-description-cards';
-    chosen.forEach(index=>{
-     const card=document.createElement('article');
-     card.className='city-planner-description-card';
-     const photoLink=document.createElement('a');
-     photoLink.className='city-planner-description-photo';
-     photoLink.href=photos[index].credit;
-     photoLink.target='_blank';
-     photoLink.rel='noopener noreferrer';
-     photoLink.setAttribute('aria-label',(lang==='ru'?'Источник фотографии: ':'Photo source: ')+names[lang][index]);
-     const img=document.createElement('img');
-     img.src=photos[index].src;
-     img.alt=names[lang][index];
-     img.loading='lazy';
-     img.decoding='async';
-     photoLink.append(img);
-     const copyBlock=document.createElement('div');
-     copyBlock.className='city-planner-description-copy';
-     const name=document.createElement('strong');
-     name.textContent=names[lang][index];
-     const detail=document.createElement('span');
-     detail.textContent=descriptions[lang][index];
-     const credit=document.createElement('a');
-     credit.className='city-planner-photo-credit';
-     credit.href=photos[index].credit;
-     credit.target='_blank';
-     credit.rel='noopener noreferrer';
-     credit.textContent=lang==='ru'?'Фото · Wikimedia Commons':'Photo · Wikimedia Commons';
-     copyBlock.append(name,detail,credit);
-     card.append(photoLink,copyBlock);
-     cards.append(card);
-    });
-    description.append(cards);
-   }else{
-    const empty=document.createElement('p');
-    empty.className='city-planner-descriptions-empty';
-    empty.textContent=lang==='ru'?'Пока ничего не выбрано. Отметьте места — и здесь появится описание прогулки.':'Nothing selected yet. Choose places to see your walk take shape here.';
-    description.append(empty);
+  checks.forEach(input=>{
+   const index=Number(input.dataset.planStop);
+   const label=input.closest('label');
+   if(!label)return;
+   label.classList.toggle('is-selected',input.checked);
+   let detail=label.querySelector('.city-planner-option-detail');
+   if(input.checked&&!detail){
+    detail=document.createElement('div');
+    detail.className='city-planner-option-detail';
+    const photo=document.createElement('img');
+    photo.src=photos[index].src;
+    photo.alt=names[lang][index];
+    photo.loading='lazy';
+    photo.decoding='async';
+    const copyBlock=document.createElement('span');
+    copyBlock.className='city-planner-option-copy';
+    const description=document.createElement('span');
+    description.textContent=descriptions[lang][index];
+    const credit=document.createElement('a');
+    credit.href=photos[index].credit;
+    credit.target='_blank';
+    credit.rel='noopener noreferrer';
+    credit.textContent=lang==='ru'?'Фото · Wikimedia Commons':'Photo · Wikimedia Commons';
+    credit.addEventListener('click',event=>event.stopPropagation());
+    copyBlock.append(description,credit);
+    detail.append(photo,copyBlock);
+    label.append(detail);
+   }else if(!input.checked&&detail){
+    detail.remove();
+   }else if(input.checked&&detail){
+    const description=detail.querySelector('.city-planner-option-copy>span');
+    if(description)description.textContent=descriptions[lang][index];
+    const credit=detail.querySelector('.city-planner-option-copy>a');
+    if(credit)credit.textContent=lang==='ru'?'Фото · Wikimedia Commons':'Photo · Wikimedia Commons';
+    const img=detail.querySelector('img');
+    if(img)img.alt=names[lang][index];
    }
-  }
+  });
   list.innerHTML='';
   if(!chosen.length){
    const li=document.createElement('li');li.textContent=copy[lang].planEmpty;list.append(li);
