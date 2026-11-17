@@ -489,31 +489,34 @@ if ('IntersectionObserver' in window) {
 }
 
 
-// Coral reading progress indicator on the homepage.
+// Reading progress: fill only the traveled portion of the page.
 (() => {
-  const homeProgress = document.getElementById('home-reading-progress-bar');
-  if (!homeProgress) return;
-  let progressTicking = false;
-  const updateHomeProgress = () => {
-    const root = document.documentElement;
-    const scrollTop = Math.max(window.scrollY || 0, root.scrollTop || 0, document.body.scrollTop || 0);
-    const scrollable = Math.max(root.scrollHeight, document.body.scrollHeight) - window.innerHeight;
-    const progress = scrollable > 0 ? Math.min(1, Math.max(0, scrollTop / scrollable)) : 0;
-    homeProgress.style.width = (progress * 100) + '%';
-    progressTicking = false;
+  const progressBar = document.getElementById('home-reading-progress-bar');
+  if (!progressBar) return;
+
+  const scrollingElement = document.scrollingElement || document.documentElement;
+  let frameRequested = false;
+
+  const updateProgress = () => {
+    const maxScroll = scrollingElement.scrollHeight - scrollingElement.clientHeight;
+    const currentScroll = Math.max(0, scrollingElement.scrollTop);
+    const progress = maxScroll > 0 ? Math.min(1, currentScroll / maxScroll) : 0;
+    progressBar.style.transform = `scaleX(${progress})`;
+    frameRequested = false;
   };
-  const requestUpdate = () => {
-    if (progressTicking) return;
-    progressTicking = true;
-    window.requestAnimationFrame(updateHomeProgress);
+
+  const scheduleUpdate = () => {
+    if (frameRequested) return;
+    frameRequested = true;
+    window.requestAnimationFrame(updateProgress);
   };
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  document.addEventListener('scroll', requestUpdate, { passive: true, capture: true });
-  window.addEventListener('resize', requestUpdate, { passive: true });
-  window.addEventListener('pageshow', requestUpdate);
-  window.addEventListener('load', requestUpdate);
-  document.querySelectorAll('img').forEach((img) => {
-    if (!img.complete) img.addEventListener('load', requestUpdate, { once: true });
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate, { passive: true });
+  window.addEventListener('pageshow', scheduleUpdate);
+  window.addEventListener('load', scheduleUpdate);
+  document.querySelectorAll('img').forEach((image) => {
+    if (!image.complete) image.addEventListener('load', scheduleUpdate, { once: true });
   });
-  requestUpdate();
+  scheduleUpdate();
 })();
