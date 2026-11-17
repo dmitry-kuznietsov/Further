@@ -22,7 +22,7 @@ function syncTheme(){
 function setLang(next){
  lang=next;document.documentElement.lang=next;
  document.querySelectorAll('[data-i18n]').forEach(node=>{const value=copy[next][node.dataset.i18n];if(value)node.innerHTML=value;});
- langButton.textContent=next==='ru'?'EN':'RU';syncTheme();
+ langButton.textContent=next==='ru'?'EN':'RU';syncTheme();document.dispatchEvent(new Event('city-language-change'));
 }
 langButton.addEventListener('click',()=>setLang(lang==='ru'?'en':'ru'));
 themeButton.addEventListener('click',()=>{
@@ -203,7 +203,7 @@ function initPlanner(){
   time.textContent=chosen.length?Math.round(min/60)+'–'+Math.round(max/60)+' '+copy[lang].planHours:'—';
   updatePlannerMap(chosen);
  };
- checks.forEach(input=>input.addEventListener('change',render));
+ document.addEventListener('city-language-change',render);\n checks.forEach(input=>input.addEventListener('change',render));
  root.querySelector('#planner-reset').addEventListener('click',()=>{checks.forEach(input=>input.checked=true);render();});
  root.querySelector('#planner-map').addEventListener('click',()=>{
   const chosen=checks.filter(input=>input.checked).map(input=>Number(input.dataset.planStop));
