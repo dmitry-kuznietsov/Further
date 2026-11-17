@@ -68,26 +68,47 @@ function initCityInteractions(){
   }),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
   revealTargets.forEach(node=>observer.observe(node));
  }else revealTargets.forEach(node=>node.classList.add('is-visible'));
+ let routeStopMapSnapshot=null;
+ let openingRoutePopup=false;
+ let restoringRouteMap=false;
  const clearActiveRouteStop=()=>{
+  const active=document.querySelector('[data-route-stop][aria-pressed="true"]');
+  if(!active)return;
   document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed','false'));
+  if(routeMap&&routeStopMapSnapshot&&!restoringRouteMap){
+   restoringRouteMap=true;
+   openingRoutePopup=true;
+   routeMap.closePopup();
+   const snapshot=routeStopMapSnapshot;
+   routeStopMapSnapshot=null;
+   routeMap.flyTo(snapshot.center,snapshot.zoom,{duration:.65});
+   openingRoutePopup=false;
+   restoringRouteMap=false;
+  }else routeStopMapSnapshot=null;
  };
  document.querySelectorAll('[data-route-stop]').forEach(stop=>{
   const activate=()=>{
    const index=Number(stop.dataset.routeStop);
-   document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed',String(item===stop)));
-   if(routeMap&&routeMarkers[index]){
-    routeMap.flyTo(routePoints[index].coords,16,{duration:.7});
-    routeMarkers[index].openPopup();
-    document.querySelector('#rome-map')?.scrollIntoView({behavior:'smooth',block:'center'});
+   if(!routeMap||!routeMarkers[index])return;
+   if(!routeStopMapSnapshot){
+    routeStopMapSnapshot={center:routeMap.getCenter(),zoom:routeMap.getZoom()};
    }
+   document.querySelectorAll('[data-route-stop]').forEach(item=>item.setAttribute('aria-pressed',String(item===stop)));
+   // Re-open even when the same stop is clicked repeatedly.
+   openingRoutePopup=true;
+   routeMap.closePopup();
+   routeMap.flyTo(routePoints[index].coords,16,{duration:.7});
+   routeMarkers[index].openPopup();
+   openingRoutePopup=false;
+   document.querySelector('#rome-map')?.scrollIntoView({behavior:'smooth',block:'center'});
   };
   stop.addEventListener('click',activate);
   stop.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
  });
- // Clicking an empty area of the map or closing its popup clears the active stop.
+ // Empty-map clicks and the popup close button clear the selection and restore the prior map view.
  if(routeMap){
   routeMap.on('click',clearActiveRouteStop);
-  routeMap.on('popupclose',clearActiveRouteStop);
+  routeMap.on('popupclose',()=>{if(!openingRoutePopup)clearActiveRouteStop();});
  }
 }
 
